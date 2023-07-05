@@ -1,0 +1,2 @@
+C:\Users\GooDDarK\source\repos\UTranslator\bin\Release\net5.0-windows\publish\UTranslator.pdb
+C:\Users\GooDDarK\source\repos\UTranslator\bin\Release\net5.0-windows\publish\UTranslator.exe

@@ -1,0 +1,1 @@
+quickbms_files.exe -f *.locres 4_0.4.27d.bms pakchunk0-WindowsNoEditor.pak pakchunk0-WindowsNoEditor

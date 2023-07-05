@@ -1,0 +1,4 @@
+C:\Users\GooDDarK\source\repos\UTranslator\bin\Release\net5.0-windows\publish\x64\UTranslator.pdb
+C:\Users\GooDDarK\source\repos\UTranslator\bin\Release\net5.0-windows\publish\x64\sni.dll
+C:\Users\GooDDarK\source\repos\UTranslator\bin\Release\net5.0-windows\publish\x64\SQLite.Interop.dll
+C:\Users\GooDDarK\source\repos\UTranslator\bin\Release\net5.0-windows\publish\x64\UTranslator.exe

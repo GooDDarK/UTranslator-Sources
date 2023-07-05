@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "QS9soij/cLXyeVU0RROBmW1Io2hmnVOUM1wf4nTp6PLqQSjSwv0rY54Edj8d1pH+gU0T0gueCezl38Gwv7X9Kw==",
+  "success": true,
+  "projectFilePath": "S:\\Visual Projects\\UTranslator\\UTranslator.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\GlebV\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
+    "C:\\Users\\GlebV\\.nuget\\packages\\selenium.webdriver\\4.1.0\\selenium.webdriver.4.1.0.nupkg.sha512",
+    "C:\\Users\\GlebV\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.17763.28\\microsoft.windows.sdk.net.ref.10.0.17763.28.nupkg.sha512"
+  ],
+  "logs": []
+}

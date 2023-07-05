@@ -1,0 +1,1 @@
+quickbms.exe -k -f *.loc.xml nw_oodle.bms DataStrm-part1.pak levels\newlevels

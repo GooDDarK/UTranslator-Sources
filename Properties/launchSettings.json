@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "EscapeSimulatorDownloadTranslator": {
+      "commandName": "Project"
+    },
+    "UTranslator": {
+      "commandName": "Project",
+      "workingDirectory": "S:\\Visual Projects\\UTranslator\\bin\\Debug\\net6.0-windows10.0.17763.0"
+    }
+  }
+}

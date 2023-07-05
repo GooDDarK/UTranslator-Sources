@@ -1,0 +1,1 @@
+UE4localizationsTool.exe export Game.locres

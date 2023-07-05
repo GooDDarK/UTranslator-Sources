@@ -1,0 +1,7 @@
+pack
+--version=3
+--mount-point=../../..
+
+"S:\Games\Dark and Darker A5\DungeonCrawler\Content\Paks\pakchunk0-Windows_0_P.pak"
+
+":zlib,rename=/:S:\Games\Dark and Darker A5\DungeonCrawler\Content\Paks\pakchunk0-Windows_0_P"

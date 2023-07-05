@@ -1,0 +1,46 @@
+E:\Program Files\Visual Projects\UTranslator\bin\Debug\net6.0-windows10.0.17763.0\UTranslator.exe
+E:\Program Files\Visual Projects\UTranslator\bin\Debug\net6.0-windows10.0.17763.0\UTranslator.deps.json
+E:\Program Files\Visual Projects\UTranslator\bin\Debug\net6.0-windows10.0.17763.0\UTranslator.runtimeconfig.json
+E:\Program Files\Visual Projects\UTranslator\bin\Debug\net6.0-windows10.0.17763.0\UTranslator.dll
+E:\Program Files\Visual Projects\UTranslator\bin\Debug\net6.0-windows10.0.17763.0\Newtonsoft.Json.dll
+E:\Program Files\Visual Projects\UTranslator\bin\Debug\net6.0-windows10.0.17763.0\WebDriver.dll
+E:\Program Files\Visual Projects\UTranslator\bin\Debug\net6.0-windows10.0.17763.0\Microsoft.Windows.SDK.NET.dll
+E:\Program Files\Visual Projects\UTranslator\bin\Debug\net6.0-windows10.0.17763.0\WinRT.Runtime.dll
+E:\Program Files\Visual Projects\UTranslator\obj\Debug\net6.0-windows10.0.17763.0\UTranslator.csproj.AssemblyReference.cache
+E:\Program Files\Visual Projects\UTranslator\obj\Debug\net6.0-windows10.0.17763.0\UTranslator.DonateForm.resources
+E:\Program Files\Visual Projects\UTranslator\obj\Debug\net6.0-windows10.0.17763.0\UTranslator.Form1.resources
+E:\Program Files\Visual Projects\UTranslator\obj\Debug\net6.0-windows10.0.17763.0\UTranslator.Form2.resources
+E:\Program Files\Visual Projects\UTranslator\obj\Debug\net6.0-windows10.0.17763.0\UTranslator.Properties.Resources.resources
+E:\Program Files\Visual Projects\UTranslator\obj\Debug\net6.0-windows10.0.17763.0\UTranslator.csproj.GenerateResource.cache
+E:\Program Files\Visual Projects\UTranslator\obj\Debug\net6.0-windows10.0.17763.0\UTranslator.GeneratedMSBuildEditorConfig.editorconfig
+E:\Program Files\Visual Projects\UTranslator\obj\Debug\net6.0-windows10.0.17763.0\UTranslator.AssemblyInfoInputs.cache
+E:\Program Files\Visual Projects\UTranslator\obj\Debug\net6.0-windows10.0.17763.0\UTranslator.AssemblyInfo.cs
+E:\Program Files\Visual Projects\UTranslator\obj\Debug\net6.0-windows10.0.17763.0\UTranslator.csproj.CoreCompileInputs.cache
+E:\Program Files\Visual Projects\UTranslator\obj\Debug\net6.0-windows10.0.17763.0\UTranslator.csproj.CopyComplete
+E:\Program Files\Visual Projects\UTranslator\obj\Debug\net6.0-windows10.0.17763.0\UTranslator.dll
+E:\Program Files\Visual Projects\UTranslator\obj\Debug\net6.0-windows10.0.17763.0\refint\UTranslator.dll
+E:\Program Files\Visual Projects\UTranslator\obj\Debug\net6.0-windows10.0.17763.0\UTranslator.genruntimeconfig.cache
+E:\Program Files\Visual Projects\UTranslator\obj\Debug\net6.0-windows10.0.17763.0\ref\UTranslator.dll
+S:\Visual Projects\UTranslator\bin\Debug\net6.0-windows10.0.17763.0\UTranslator.exe
+S:\Visual Projects\UTranslator\bin\Debug\net6.0-windows10.0.17763.0\UTranslator.deps.json
+S:\Visual Projects\UTranslator\bin\Debug\net6.0-windows10.0.17763.0\UTranslator.runtimeconfig.json
+S:\Visual Projects\UTranslator\bin\Debug\net6.0-windows10.0.17763.0\UTranslator.dll
+S:\Visual Projects\UTranslator\bin\Debug\net6.0-windows10.0.17763.0\Newtonsoft.Json.dll
+S:\Visual Projects\UTranslator\bin\Debug\net6.0-windows10.0.17763.0\WebDriver.dll
+S:\Visual Projects\UTranslator\bin\Debug\net6.0-windows10.0.17763.0\Microsoft.Windows.SDK.NET.dll
+S:\Visual Projects\UTranslator\bin\Debug\net6.0-windows10.0.17763.0\WinRT.Runtime.dll
+S:\Visual Projects\UTranslator\obj\Debug\net6.0-windows10.0.17763.0\UTranslator.csproj.AssemblyReference.cache
+S:\Visual Projects\UTranslator\obj\Debug\net6.0-windows10.0.17763.0\UTranslator.DonateForm.resources
+S:\Visual Projects\UTranslator\obj\Debug\net6.0-windows10.0.17763.0\UTranslator.Form1.resources
+S:\Visual Projects\UTranslator\obj\Debug\net6.0-windows10.0.17763.0\UTranslator.Form2.resources
+S:\Visual Projects\UTranslator\obj\Debug\net6.0-windows10.0.17763.0\UTranslator.Properties.Resources.resources
+S:\Visual Projects\UTranslator\obj\Debug\net6.0-windows10.0.17763.0\UTranslator.csproj.GenerateResource.cache
+S:\Visual Projects\UTranslator\obj\Debug\net6.0-windows10.0.17763.0\UTranslator.GeneratedMSBuildEditorConfig.editorconfig
+S:\Visual Projects\UTranslator\obj\Debug\net6.0-windows10.0.17763.0\UTranslator.AssemblyInfoInputs.cache
+S:\Visual Projects\UTranslator\obj\Debug\net6.0-windows10.0.17763.0\UTranslator.AssemblyInfo.cs
+S:\Visual Projects\UTranslator\obj\Debug\net6.0-windows10.0.17763.0\UTranslator.csproj.CoreCompileInputs.cache
+S:\Visual Projects\UTranslator\obj\Debug\net6.0-windows10.0.17763.0\UTranslator.csproj.CopyComplete
+S:\Visual Projects\UTranslator\obj\Debug\net6.0-windows10.0.17763.0\UTranslator.dll
+S:\Visual Projects\UTranslator\obj\Debug\net6.0-windows10.0.17763.0\refint\UTranslator.dll
+S:\Visual Projects\UTranslator\obj\Debug\net6.0-windows10.0.17763.0\UTranslator.genruntimeconfig.cache
+S:\Visual Projects\UTranslator\obj\Debug\net6.0-windows10.0.17763.0\ref\UTranslator.dll

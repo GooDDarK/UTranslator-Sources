@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "baidu-translate-api": "^0.4.3"
+  }
+}

@@ -1,0 +1,46 @@
+C:\Users\GooDDarK\source\repos\UTranslator\bin\Debug\net5.0-windows\UTranslator.exe
+C:\Users\GooDDarK\source\repos\UTranslator\bin\Debug\net5.0-windows\UTranslator.deps.json
+C:\Users\GooDDarK\source\repos\UTranslator\bin\Debug\net5.0-windows\UTranslator.runtimeconfig.json
+C:\Users\GooDDarK\source\repos\UTranslator\bin\Debug\net5.0-windows\UTranslator.runtimeconfig.dev.json
+C:\Users\GooDDarK\source\repos\UTranslator\bin\Debug\net5.0-windows\UTranslator.dll
+C:\Users\GooDDarK\source\repos\UTranslator\bin\Debug\net5.0-windows\ref\UTranslator.dll
+C:\Users\GooDDarK\source\repos\UTranslator\bin\Debug\net5.0-windows\UTranslator.pdb
+C:\Users\GooDDarK\source\repos\UTranslator\bin\Debug\net5.0-windows\Newtonsoft.Json.dll
+C:\Users\GooDDarK\source\repos\UTranslator\bin\Debug\net5.0-windows\WebDriver.dll
+C:\Users\GooDDarK\source\repos\UTranslator\obj\Debug\net5.0-windows\UTranslator.csprojAssemblyReference.cache
+C:\Users\GooDDarK\source\repos\UTranslator\obj\Debug\net5.0-windows\UTranslator.Form1.resources
+C:\Users\GooDDarK\source\repos\UTranslator\obj\Debug\net5.0-windows\UTranslator.Form2.resources
+C:\Users\GooDDarK\source\repos\UTranslator\obj\Debug\net5.0-windows\UTranslator.Properties.Resources.resources
+C:\Users\GooDDarK\source\repos\UTranslator\obj\Debug\net5.0-windows\UTranslator.csproj.GenerateResource.cache
+C:\Users\GooDDarK\source\repos\UTranslator\obj\Debug\net5.0-windows\UTranslator.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\GooDDarK\source\repos\UTranslator\obj\Debug\net5.0-windows\UTranslator.AssemblyInfoInputs.cache
+C:\Users\GooDDarK\source\repos\UTranslator\obj\Debug\net5.0-windows\UTranslator.AssemblyInfo.cs
+C:\Users\GooDDarK\source\repos\UTranslator\obj\Debug\net5.0-windows\UTranslator.csproj.CoreCompileInputs.cache
+C:\Users\GooDDarK\source\repos\UTranslator\obj\Debug\net5.0-windows\UTranslator.csproj.CopyComplete
+C:\Users\GooDDarK\source\repos\UTranslator\obj\Debug\net5.0-windows\UTranslator.dll
+C:\Users\GooDDarK\source\repos\UTranslator\obj\Debug\net5.0-windows\ref\UTranslator.dll
+C:\Users\GooDDarK\source\repos\UTranslator\obj\Debug\net5.0-windows\UTranslator.pdb
+C:\Users\GooDDarK\source\repos\UTranslator\obj\Debug\net5.0-windows\UTranslator.genruntimeconfig.cache
+C:\Users\GooDDarK\source\repos\UTranslator\obj\Debug\net5.0-windows\UTranslator.DonateForm.resources
+E:\Program Files\Visual Projects\UTranslator\bin\Debug\net5.0-windows\UTranslator.exe
+E:\Program Files\Visual Projects\UTranslator\bin\Debug\net5.0-windows\UTranslator.deps.json
+E:\Program Files\Visual Projects\UTranslator\bin\Debug\net5.0-windows\UTranslator.runtimeconfig.json
+E:\Program Files\Visual Projects\UTranslator\bin\Debug\net5.0-windows\UTranslator.runtimeconfig.dev.json
+E:\Program Files\Visual Projects\UTranslator\bin\Debug\net5.0-windows\UTranslator.dll
+E:\Program Files\Visual Projects\UTranslator\bin\Debug\net5.0-windows\Newtonsoft.Json.dll
+E:\Program Files\Visual Projects\UTranslator\bin\Debug\net5.0-windows\WebDriver.dll
+E:\Program Files\Visual Projects\UTranslator\obj\Debug\net5.0-windows\UTranslator.csproj.AssemblyReference.cache
+E:\Program Files\Visual Projects\UTranslator\obj\Debug\net5.0-windows\UTranslator.DonateForm.resources
+E:\Program Files\Visual Projects\UTranslator\obj\Debug\net5.0-windows\UTranslator.Form1.resources
+E:\Program Files\Visual Projects\UTranslator\obj\Debug\net5.0-windows\UTranslator.Form2.resources
+E:\Program Files\Visual Projects\UTranslator\obj\Debug\net5.0-windows\UTranslator.Properties.Resources.resources
+E:\Program Files\Visual Projects\UTranslator\obj\Debug\net5.0-windows\UTranslator.csproj.GenerateResource.cache
+E:\Program Files\Visual Projects\UTranslator\obj\Debug\net5.0-windows\UTranslator.GeneratedMSBuildEditorConfig.editorconfig
+E:\Program Files\Visual Projects\UTranslator\obj\Debug\net5.0-windows\UTranslator.AssemblyInfoInputs.cache
+E:\Program Files\Visual Projects\UTranslator\obj\Debug\net5.0-windows\UTranslator.AssemblyInfo.cs
+E:\Program Files\Visual Projects\UTranslator\obj\Debug\net5.0-windows\UTranslator.csproj.CoreCompileInputs.cache
+E:\Program Files\Visual Projects\UTranslator\obj\Debug\net5.0-windows\UTranslator.csproj.CopyComplete
+E:\Program Files\Visual Projects\UTranslator\obj\Debug\net5.0-windows\UTranslator.dll
+E:\Program Files\Visual Projects\UTranslator\obj\Debug\net5.0-windows\refint\UTranslator.dll
+E:\Program Files\Visual Projects\UTranslator\obj\Debug\net5.0-windows\UTranslator.genruntimeconfig.cache
+E:\Program Files\Visual Projects\UTranslator\obj\Debug\net5.0-windows\ref\UTranslator.dll

@@ -1,0 +1,1 @@
+UE4localizationsTool.exe import Game.locres.txt Game.locres

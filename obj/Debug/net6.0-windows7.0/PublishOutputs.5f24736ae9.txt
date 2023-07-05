@@ -1,0 +1,6 @@
+E:\Program Files\Visual Projects\UTranslator\bin\Debug\net6.0-windows7.0\publish\UTranslator.exe
+E:\Program Files\Visual Projects\UTranslator\bin\Debug\net6.0-windows7.0\publish\UTranslator.dll
+E:\Program Files\Visual Projects\UTranslator\bin\Debug\net6.0-windows7.0\publish\UTranslator.deps.json
+E:\Program Files\Visual Projects\UTranslator\bin\Debug\net6.0-windows7.0\publish\UTranslator.runtimeconfig.json
+E:\Program Files\Visual Projects\UTranslator\bin\Debug\net6.0-windows7.0\publish\Newtonsoft.Json.dll
+E:\Program Files\Visual Projects\UTranslator\bin\Debug\net6.0-windows7.0\publish\WebDriver.dll

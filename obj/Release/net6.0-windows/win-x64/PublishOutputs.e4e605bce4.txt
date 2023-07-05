@@ -1,0 +1,1 @@
+E:\Program Files\Visual Projects\UTranslator\bin\Debug\net6.0-windows7.0\publish\win-x64\UTranslator.exe
