@@ -133,7 +133,7 @@ namespace UTranslator.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на quickbms_files.exe 4_0.4.27d.bms pakchunk0-WindowsNoEditor.pak pakchunk0-WindowsNoEditor.
+        ///   Ищет локализованную строку, похожую на quickbms_files.exe -f *.locres 4_0.4.27d.bms pakchunk0-WindowsNoEditor.pak pakchunk0-WindowsNoEditor.
         /// </summary>
         internal static string export_locres_bat {
             get {

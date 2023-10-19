@@ -49,7 +49,7 @@ namespace UTranslator
 
             Process.Start(new ProcessStartInfo
             {
-                FileName = "https://vk.com/donut/utranslator", 
+                FileName = "https://vk.com/donut/utranslator",
                 UseShellExecute = true
             });
         }

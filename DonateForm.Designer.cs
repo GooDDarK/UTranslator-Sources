@@ -30,105 +30,103 @@ namespace UTranslator
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DonateForm));
-            this.label1 = new System.Windows.Forms.Label();
-            this.QiwiLink = new System.Windows.Forms.LinkLabel();
-            this.YandexLink = new System.Windows.Forms.LinkLabel();
-            this.PaypalLink = new System.Windows.Forms.LinkLabel();
-            this.VkDonutLink = new System.Windows.Forms.LinkLabel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.SuspendLayout();
+            label1 = new System.Windows.Forms.Label();
+            QiwiLink = new System.Windows.Forms.LinkLabel();
+            YandexLink = new System.Windows.Forms.LinkLabel();
+            PaypalLink = new System.Windows.Forms.LinkLabel();
+            VkDonutLink = new System.Windows.Forms.LinkLabel();
+            label2 = new System.Windows.Forms.Label();
+            label3 = new System.Windows.Forms.Label();
+            SuspendLayout();
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(28, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(303, 62);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Щёлкните на ссылку, чтобы скопировать в буфер обмена ID кошелька и перейти на сай" +
-    "т. Все средства уйдут на развитие проекта и улучшение его качества. Спасибо!";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            label1.Location = new System.Drawing.Point(28, 20);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(303, 62);
+            label1.TabIndex = 0;
+            label1.Text = "Щёлкните на ссылку, чтобы скопировать в буфер обмена ID кошелька и перейти на сайт. Все средства уйдут на развитие проекта и улучшение его качества. Спасибо!";
+            label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // QiwiLink
             // 
-            this.QiwiLink.AutoSize = true;
-            this.QiwiLink.Location = new System.Drawing.Point(28, 121);
-            this.QiwiLink.Name = "QiwiLink";
-            this.QiwiLink.Size = new System.Drawing.Size(33, 15);
-            this.QiwiLink.TabIndex = 1;
-            this.QiwiLink.TabStop = true;
-            this.QiwiLink.Text = "QIWI";
-            this.QiwiLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.QiwiLink_LinkClicked);
+            QiwiLink.AutoSize = true;
+            QiwiLink.Location = new System.Drawing.Point(28, 121);
+            QiwiLink.Name = "QiwiLink";
+            QiwiLink.Size = new System.Drawing.Size(33, 15);
+            QiwiLink.TabIndex = 1;
+            QiwiLink.TabStop = true;
+            QiwiLink.Text = "QIWI";
+            QiwiLink.LinkClicked += QiwiLink_LinkClicked;
             // 
             // YandexLink
             // 
-            this.YandexLink.AutoSize = true;
-            this.YandexLink.Location = new System.Drawing.Point(28, 145);
-            this.YandexLink.Name = "YandexLink";
-            this.YandexLink.Size = new System.Drawing.Size(136, 15);
-            this.YandexLink.TabIndex = 2;
-            this.YandexLink.TabStop = true;
-            this.YandexLink.Text = "ЮMoney: +79858433082";
-            this.YandexLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.YandexLink_LinkClicked);
+            YandexLink.AutoSize = true;
+            YandexLink.Location = new System.Drawing.Point(28, 145);
+            YandexLink.Name = "YandexLink";
+            YandexLink.Size = new System.Drawing.Size(160, 15);
+            YandexLink.TabIndex = 2;
+            YandexLink.TabStop = true;
+            YandexLink.Text = "ЮMoney: +7 (985) 843-30-82";
+            YandexLink.LinkClicked += YandexLink_LinkClicked;
             // 
             // PaypalLink
             // 
-            this.PaypalLink.AutoSize = true;
-            this.PaypalLink.Location = new System.Drawing.Point(28, 169);
-            this.PaypalLink.Name = "PaypalLink";
-            this.PaypalLink.Size = new System.Drawing.Size(42, 15);
-            this.PaypalLink.TabIndex = 3;
-            this.PaypalLink.TabStop = true;
-            this.PaypalLink.Text = "PayPal";
-            this.PaypalLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.PaypalLink_LinkClicked);
+            PaypalLink.AutoSize = true;
+            PaypalLink.Location = new System.Drawing.Point(28, 169);
+            PaypalLink.Name = "PaypalLink";
+            PaypalLink.Size = new System.Drawing.Size(42, 15);
+            PaypalLink.TabIndex = 3;
+            PaypalLink.TabStop = true;
+            PaypalLink.Text = "PayPal";
+            PaypalLink.LinkClicked += PaypalLink_LinkClicked;
             // 
             // VkDonutLink
             // 
-            this.VkDonutLink.AutoSize = true;
-            this.VkDonutLink.Location = new System.Drawing.Point(28, 97);
-            this.VkDonutLink.Name = "VkDonutLink";
-            this.VkDonutLink.Size = new System.Drawing.Size(57, 15);
-            this.VkDonutLink.TabIndex = 4;
-            this.VkDonutLink.TabStop = true;
-            this.VkDonutLink.Text = "VK Donut";
-            this.VkDonutLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.VkDonutLink_LinkClicked);
-            this.VkDonutLink.MouseMove += new System.Windows.Forms.MouseEventHandler(this.VkDonutLink_MouseMove);
+            VkDonutLink.AutoSize = true;
+            VkDonutLink.Location = new System.Drawing.Point(28, 97);
+            VkDonutLink.Name = "VkDonutLink";
+            VkDonutLink.Size = new System.Drawing.Size(57, 15);
+            VkDonutLink.TabIndex = 4;
+            VkDonutLink.TabStop = true;
+            VkDonutLink.Text = "VK Donut";
+            VkDonutLink.LinkClicked += VkDonutLink_LinkClicked;
+            VkDonutLink.MouseMove += VkDonutLink_MouseMove;
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(28, 193);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(119, 15);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Сбер: +79104065201";
+            label2.Location = new System.Drawing.Point(28, 193);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(250, 15);
+            label2.TabIndex = 5;
+            label2.Text = "Сбер: +7 (985) 843-30-82";
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(28, 208);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(152, 15);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Тинькофф: +79858433082";
+            label3.Location = new System.Drawing.Point(28, 208);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(303, 15);
+            label3.TabIndex = 6;
+            label3.Text = "Тинькофф: +7 (985) 843-30-82";
             // 
             // DonateForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(359, 246);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.VkDonutLink);
-            this.Controls.Add(this.PaypalLink);
-            this.Controls.Add(this.YandexLink);
-            this.Controls.Add(this.QiwiLink);
-            this.Controls.Add(this.label1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
-            this.Name = "DonateForm";
-            this.Text = "Поддержать разработчика";
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(359, 246);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(VkDonutLink);
+            Controls.Add(PaypalLink);
+            Controls.Add(YandexLink);
+            Controls.Add(QiwiLink);
+            Controls.Add(label1);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
+            Name = "DonateForm";
+            Text = "Поддержать разработчика";
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

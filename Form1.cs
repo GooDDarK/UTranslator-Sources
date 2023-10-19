@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using Newtonsoft.Json.Linq;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Interactions;
 using System;
@@ -25,7 +26,7 @@ namespace UTranslator
     public partial class Form1 : Form
     {
         string machineName = Environment.MachineName;
-        string myMachineName = "DESKTOP-RLHNLD2";
+        string myMachineName = "DESKTOP-QUN97QT";
         string[] alreadyTranslated = new string[] { };
         string[] arraysBackup = new string[] { };
         string[] filesToRead = new string[] { };
@@ -53,8 +54,8 @@ namespace UTranslator
         bool pressUpdateButton = false;
         List<int> newLinesNumbers = new();
 
-        [DllImport(@"S:\Visual Projects\UTranslator\bin\Debug\net6.0-windows10.0.17763.0\mem_access_provider.dll")]
-        static extern int write_memory(UInt32 process_id, UInt64 address, string buffer, int size);
+        //[DllImport(@"S:\Visual Projects\UTranslator\bin\Debug\net6.0-windows10.0.17763.0\mem_access_provider.dll")]
+        //static extern int write_memory(UInt32 process_id, UInt64 address, string buffer, int size);
 
         public Form1()
         {
@@ -78,7 +79,7 @@ namespace UTranslator
                 {
                     sw.WriteLine("nwr_ver = 0.1");
                 }
-            
+
                 configLines = File.ReadAllLines(Application.StartupPath + @"UTranslator.config");
             }
 
@@ -141,7 +142,7 @@ namespace UTranslator
         {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.AppendLine("firstrun = 1");
-            stringBuilder.AppendLine("version = 0.2.9.4");
+            stringBuilder.AppendLine("version = 0.3.8");
             stringBuilder.AppendLine("skill = 0");
             stringBuilder.AppendLine("items = 0");
             stringBuilder.AppendLine("npc = 0");
@@ -162,7 +163,7 @@ namespace UTranslator
             stringBuilder.AppendLine("proxy = 0");
             stringBuilder.AppendLine("mortuary_ver = 0.5");
             stringBuilder.AppendLine("item_desc = 0");
-            stringBuilder.AppendLine("DungeonCrawler_ver = 0.5.0.1166");
+            stringBuilder.AppendLine("DungeonCrawler_ver = 0.6.1.1684");
             stringBuilder.AppendLine("nwr_ver = 0.1");
             File.WriteAllText(Application.StartupPath + @"UTranslator.config", stringBuilder.ToString());
         }
@@ -170,7 +171,7 @@ namespace UTranslator
         void Form1_Load(object sender, EventArgs e)
         {
             System.Threading.Thread.Sleep(500);
-            
+
             if (Process.GetProcessesByName("UTranslator_x86").Length > 0)
             {
                 deleteFile(Application.StartupPath + "UTranslator.exe");
@@ -262,6 +263,8 @@ namespace UTranslator
             {
                 machineNameText.Enabled = true;
                 machineNameText.Visible = true;
+                button1.Enabled = true;
+                button1.Visible = true;
                 machineNameText.Text = myMachineName;
                 deeplButton.Enabled = true;
             }
@@ -269,6 +272,8 @@ namespace UTranslator
             {
                 machineNameText.Enabled = false;
                 machineNameText.Visible = false;
+                button1.Enabled = false;
+                button1.Visible = false;
                 deeplButton.Checked = false;
                 deeplButton.Enabled = false;
                 yandexButton.Checked = true;
@@ -281,6 +286,15 @@ namespace UTranslator
         void choosePathBtn_Click(object sender, EventArgs e)
         {
             ChoosePath();
+        }
+
+        private void txtPath_TextChanged(object sender, EventArgs e)
+        {
+            path = txtPath.Text;
+            //if (launch_status == 1)
+            //    TryFix();
+
+            findGameName();
         }
 
         void ChoosePath()//Обработка изменения пути к игре
@@ -299,24 +313,41 @@ namespace UTranslator
                 findGameName();
             }
 
-            if (gameName == "DungeonCrawler")
-            {
-                deeplButton.Enabled = false;
-                deeplButton.Checked = false;
-                yandexButton.Checked = true;
-
-                deeplButton.Text = "Deepl переводчик";
-            }
+            //if (gameName == "DungeonCrawler")
+            //{
+            //    deeplButton.Enabled = false;
+            //    deeplButton.Checked = false;
+            //    yandexButton.Checked = true;
+            //
+            //    deeplButton.Text = "Deepl переводчик";
+            //}
         }
 
         void findGameName()
         {
+            if (!Directory.Exists(path))
+            {
+                path = "";
+                //txtPath.Text = "";
+                gameName = "";
+
+                MessageBox.Show(
+                     "Указанная папка не найдена.",
+                     "Ошибка",
+                     MessageBoxButtons.OK,
+                     MessageBoxIcon.Error,
+                     MessageBoxDefaultButton.Button1,
+                     MessageBoxOptions.DefaultDesktopOnly);
+
+                return;
+            }
+
             string[] exeFind = Directory.GetFiles(path, "*.exe");
 
             if (exeFind.Length == 0)
             {
                 path = "";
-                txtPath.Text = "";
+                //txtPath.Text = "";
                 gameName = "";
 
                 MessageBox.Show(
@@ -437,6 +468,7 @@ namespace UTranslator
                 skillsNameCheckTranslate.Checked = true;
                 skillsNameCheckTranslate.Enabled = true;
                 itemsCheckTranslate.Enabled = true;
+                itemsCheckTranslate.Checked = true;
                 skillsDescriptionCheckTranslate.Enabled = false;
                 npcCheckTranslate.Checked = false;
                 npcCheckTranslate.Enabled = true;
@@ -444,6 +476,7 @@ namespace UTranslator
                 itemsDesc.Enabled = false;
                 itemsDesc.Visible = true;
                 itemsDesc.Checked = false;
+
                 itemsCheckTranslate.Text = "Предметы (Название)";
             }
             else if (gameName == "NewWorld")
@@ -683,8 +716,8 @@ namespace UTranslator
 
                     //if (newRowsCheck)
                     //{
-                        ReplaceStringInFile(dataPath + @"\export_locres.bat", 0, @"quickbms_4gb_files.exe -f Game.locres 4_0.4.27d.bms pakchunk0-Windows_0_P.pak pakchunk0-Windows_0_P");
-                        System.Threading.Thread.Sleep(500);
+                    ReplaceStringInFile(dataPath + @"\export_locres.bat", 0, @"quickbms_4gb_files.exe -f Game.locres 4_0.4.27d.bms pakchunk0-Windows_0_P.pak pakchunk0-Windows_0_P");
+                    System.Threading.Thread.Sleep(500);
                     //}
 
                     Directory.CreateDirectory(dataPath + @"\pakchunk0-Windows_0_P");
@@ -759,18 +792,22 @@ namespace UTranslator
 
                 if (machineName == myMachineName)
                 {
-                    File.WriteAllBytesAsync(dataPath + @"\UPacker_Advanced.exe", Resources.UPacker_Advanced_exe);
-                    File.WriteAllTextAsync(dataPath + @"\Export_txt.bat", Resources.Export_txt_bat);
-                    System.Threading.Thread.Sleep(500);
-
-                    Process.Start(new ProcessStartInfo
+                    if (!File.Exists(localizationPath + @"PatreonNamesFemale.txt"))
                     {
-                        FileName = dataPath + @"\Export_txt.bat",
-                        WorkingDirectory = Path.GetDirectoryName(dataPath + @"\Export_txt.bat"),
-                        CreateNoWindow = true
-                    }).WaitForExit();
+                        File.WriteAllBytesAsync(dataPath + @"\UPacker_Advanced.exe", Resources.UPacker_Advanced_exe);
+                        File.WriteAllTextAsync(dataPath + @"\Export_txt.bat", Resources.Export_txt_bat);
+                        System.Threading.Thread.Sleep(500);
 
-                    deleteFile(dataPath + @"\Export_txt.bat");
+                        Process.Start(new ProcessStartInfo
+                        {
+                            FileName = dataPath + @"\Export_txt.bat",
+                            WorkingDirectory = Path.GetDirectoryName(dataPath + @"\Export_txt.bat"),
+                            CreateNoWindow = true
+                        }).WaitForExit();
+
+                        deleteFile(dataPath + @"\Export_txt.bat");
+                    }
+
                     deleteFile(localizationPath + @"PatreonNamesFemale.txt");
                     deleteFile(localizationPath + @"PatreonNamesMale.txt");
                     deleteFile(localizationPath + @"femaleFirstNames.txt");
@@ -842,13 +879,69 @@ namespace UTranslator
                     deleteFile(localizationPath + @"ValEvent5_00001.txt");
                     deleteFile(localizationPath + @"whisperPenatent_00001.txt");
                     deleteFile(localizationPath + @"YouShouldBe.txt");
+                    deleteFile(localizationPath + @"itemInfoPatch.txt");
+                    deleteFile(localizationPath + @"itemInfoPatch_00001.txt");
+                    deleteFile(localizationPath + @"itemInfoPatch_00002.txt");
+                    deleteFile(localizationPath + @"itemInfoPatch_00003.txt");
+                    deleteFile(localizationPath + @"itemInfoPatch_00004.txt");
+                    deleteFile(localizationPath + @"itemInfoPatch_00006.txt");
+                    deleteFile(localizationPath + @"itemInfoPatch_00007.txt");
+                    deleteFile(localizationPath + @"itemInfoPatch_00008.txt");
+                    deleteFile(localizationPath + @"itemInfoPatch_00009.txt");
+                    deleteFile(localizationPath + @"Patch_ccLines.txt");
+                    deleteFile(localizationPath + @"Patch_ccLines_00001.txt");
+                    deleteFile(localizationPath + @"Patch_ccLines_00002.txt");
+                    deleteFile(localizationPath + @"Patch_ccLines_00003.txt");
+                    deleteFile(localizationPath + @"Patch_ccLines_00005.txt");
+                    deleteFile(localizationPath + @"Patch_ccLines_00006.txt");
+                    deleteFile(localizationPath + @"Patch_ccLines_00007.txt");
+                    deleteFile(localizationPath + @"Patch_ccLines_00008.txt");
+                    deleteFile(localizationPath + @"Patch_ccLines_00009.txt");
+                    deleteFile(localizationPath + @"Patch_ExorcismWIP.txt");
+                    deleteFile(localizationPath + @"Patch_ExorcismWIP_00004.txt");
+                    deleteFile(localizationPath + @"Patch_ExorcismWIP_00002.txt");
+                    deleteFile(localizationPath + @"Patch_ExorcismWIP_00003.txt");
+                    deleteFile(localizationPath + @"Patch_ExorcismWIP_00005.txt");
+                    deleteFile(localizationPath + @"Patch_ExorcismWIP_00006.txt");
+                    deleteFile(localizationPath + @"Patch_ExorcismWIP_00007.txt");
+                    deleteFile(localizationPath + @"Patch_ExorcismWIP_00008.txt");
+                    deleteFile(localizationPath + @"Patch_ExorcismWIP_00009.txt");
+                    deleteFile(localizationPath + @"Patch_Notes.txt");
+                    deleteFile(localizationPath + @"Patch_Notes_00004.txt");
+                    deleteFile(localizationPath + @"Patch_Notes_00002.txt");
+                    deleteFile(localizationPath + @"Patch_Notes_00003.txt");
+                    deleteFile(localizationPath + @"Patch_Notes_00005.txt");
+                    deleteFile(localizationPath + @"Patch_Notes_00006.txt");
+                    deleteFile(localizationPath + @"Patch_Notes_00007.txt");
+                    deleteFile(localizationPath + @"Patch_Notes_00008.txt");
+                    deleteFile(localizationPath + @"Patch_Notes_00001.txt");
+                    deleteFile(localizationPath + @"Patch_UiText.txt");
+                    deleteFile(localizationPath + @"Patch_UiText_00004.txt");
+                    deleteFile(localizationPath + @"Patch_UiText_00002.txt");
+                    deleteFile(localizationPath + @"Patch_UiText_00009.txt");
+                    deleteFile(localizationPath + @"Patch_UiText_00005.txt");
+                    deleteFile(localizationPath + @"Patch_UiText_00006.txt");
+                    deleteFile(localizationPath + @"Patch_UiText_00007.txt");
+                    deleteFile(localizationPath + @"Patch_UiText_00008.txt");
+                    deleteFile(localizationPath + @"Patch_UiText_00001.txt");
+                    deleteFile(localizationPath + @"Patch_VHS_slide.txt");
+                    deleteFile(localizationPath + @"Patch_VHS_slide_00004.txt");
+                    deleteFile(localizationPath + @"Patch_VHS_slide_00002.txt");
+                    deleteFile(localizationPath + @"Patch_VHS_slide_00009.txt");
+                    deleteFile(localizationPath + @"Patch_VHS_slide_00005.txt");
+                    deleteFile(localizationPath + @"Patch_VHS_slide_00003.txt");
+                    deleteFile(localizationPath + @"Patch_VHS_slide_00007.txt");
+                    deleteFile(localizationPath + @"Patch_VHS_slide_00008.txt");
+                    deleteFile(localizationPath + @"Patch_VHS_slide_00001.txt");
 
                     string[] filesToRead = Directory.GetFiles(localizationPath);
 
                     for (int i = 0; i < filesToRead.Length; i++)
                     {
-                        if (filesToRead[i].Contains("_fr") || filesToRead[i].Contains("_de") || filesToRead[i].Contains("_es") || filesToRead[i].Contains("_it") || filesToRead[i].Contains("_ja")
-                            || filesToRead[i].Contains("_ko") || filesToRead[i].Contains("_tr") || filesToRead[i].Contains("_zh_cn"))
+                        string checkedFile = filesToRead[i].Replace(localizationPath, "");
+
+                        if (checkedFile.Contains("_fr") || checkedFile.Contains("_de") || checkedFile.Contains("_es") || checkedFile.Contains("_it") || checkedFile.Contains("_ja")
+                            || checkedFile.Contains("_ko") || checkedFile.Contains("_tr") || checkedFile.Contains("_zh_cn"))
                         {
                             deleteFile(filesToRead[i]);
                         }
@@ -936,40 +1029,40 @@ namespace UTranslator
                 deleteFile(localizationPath + @"areadefinitions.loc.xml");
             }
             #region Book of travels
-                /*else if (gameName == "BookOfTravels")
+            /*else if (gameName == "BookOfTravels")
+            {
+                localizationPath = dataPath + @"\Unity_Assets_Files\resources";
+
+                if (!File.Exists(localizationPath + @"LICENSE.txt"))
                 {
-                    localizationPath = dataPath + @"\Unity_Assets_Files\resources";
+                    File.WriteAllBytesAsync(dataPath + @"\Unity.exe", Resources.Unity_exe);
+                    File.WriteAllTextAsync(dataPath + @"\Export_Binary.bat", Resources.Export_Binary_bat);
+                    System.Threading.Thread.Sleep(500);
 
-                    if (!File.Exists(localizationPath + @"LICENSE.txt"))
+                    Process.Start(new ProcessStartInfo
                     {
-                        File.WriteAllBytesAsync(dataPath + @"\Unity.exe", Resources.Unity_exe);
-                        File.WriteAllTextAsync(dataPath + @"\Export_Binary.bat", Resources.Export_Binary_bat);
-                        System.Threading.Thread.Sleep(500);
+                        FileName = dataPath + @"\Export_Binary.bat",
+                        WorkingDirectory = Path.GetDirectoryName(dataPath + @"\Export_Binary.bat"),
+                        CreateNoWindow = true
+                    }).WaitForExit();
+                }
 
-                        Process.Start(new ProcessStartInfo
-                        {
-                            FileName = dataPath + @"\Export_Binary.bat",
-                            WorkingDirectory = Path.GetDirectoryName(dataPath + @"\Export_Binary.bat"),
-                            CreateNoWindow = true
-                        }).WaitForExit();
-                    }
+                deleteFile(dataPath + @"\Export_Binary.bat");
 
-                    deleteFile(dataPath + @"\Export_Binary.bat");
+                if (!File.Exists(localizationPath + @"LICENSE.txt"))
+                    return;
 
-                    if (!File.Exists(localizationPath + @"LICENSE.txt"))
-                        return;
+                if (!updateOrReinstall)
+                {
+                    CreateBackupTestAsync();
+                    int rowsInFile = File.ReadAllLines(localizationPath + @"I2Languages.csv").Length;
+                    progressBar.BeginInvoke((MethodInvoker)(() => progressBar.Value = 0));
+                    progressBar.BeginInvoke((MethodInvoker)(() => progressBar.Maximum = progressBar.Maximum + (rowsInFile * 3) + 5));
 
-                    if (!updateOrReinstall)
-                    {
-                        CreateBackupTestAsync();
-                        int rowsInFile = File.ReadAllLines(localizationPath + @"I2Languages.csv").Length;
-                        progressBar.BeginInvoke((MethodInvoker)(() => progressBar.Value = 0));
-                        progressBar.BeginInvoke((MethodInvoker)(() => progressBar.Maximum = progressBar.Maximum + (rowsInFile * 3) + 5));
-
-                        SqlWorkAsync();
-                    }
-                }*/
-                #endregion
+                    SqlWorkAsync();
+                }
+            }*/
+            #endregion
         }
 
         void deleteTranslate_Click(object sender, EventArgs e)
@@ -1114,11 +1207,14 @@ namespace UTranslator
                 }
                 else if (gameName == "DungeonCrawler")
                 {
-                    string localDataPath = path + @"\" + gameName + @"\Content\Paks";
+                    string localDataPath = path + @"\" + gameName + @"\Content\Paks\~mods";
                     //string localLocalizationPath = localDataPath + @"\Unity_Assets_Files\resources\Mono\I2\I2.Loc";
 
                     deleteFile(localDataPath + @"\pakchunk0-Windows_0_P.pak");
-                    File.Copy(Application.StartupPath + @$"backup\{gameName}_backup", localDataPath + @"\pakchunk0-Windows_0_P.pak");
+                    System.Threading.Thread.Sleep(500);
+                    Directory.Delete(localDataPath);
+
+                    //File.Copy(Application.StartupPath + @$"backup\{gameName}_backup", localDataPath + @"\pakchunk0-Windows_0_P.pak");
                 }
 
                 deleteFile(backupPath + $"{gameName}_backup");
@@ -1233,12 +1329,16 @@ namespace UTranslator
             {
                 dataPath = path + @"\" + gameName + @"\Content\Paks";
 
+                if (!Directory.Exists(dataPath))
+                    Directory.CreateDirectory(dataPath);
+
                 if (!File.Exists(backupPath + @"\DungeonCrawler_backup"))
                 {
-                    File.Copy(dataPath + @"\pakchunk0-Windows_0_P.pak", backupPath + @"\DungeonCrawler_backup");
+                    //File.Copy(dataPath + @"\pakchunk0-Windows_0_P.pak", backupPath + @"\DungeonCrawler_backup");
+                    File.Copy(path + @"\" + gameName + @"\Content\Paks" + @"\pakchunk0-Windows_0_P.pak", backupPath + @"\DungeonCrawler_backup");
                 }
                 System.Threading.Thread.Sleep(500);
-                deleteFile(dataPath + @"\pakchunk0-Windows_0_P.pak");
+                deleteFile(path + @"\" + gameName + @"\Content\Paks" + @"\pakchunk0-Windows_0_P.pak");
             }
             System.Threading.Thread.Sleep(500);
 
@@ -1251,7 +1351,7 @@ namespace UTranslator
                 if (yandexButton.Checked)
                     //Downloading_Files("https://downloader.disk.yandex.ru/disk/efbb7bef0e5fbdd91254b55a854ad4b32de68a637ed77303cb9d8674bb48dfed/6471de96/KDCJoYsET2b29yC03CAOk2V2B7vrSvZHf4wmBpZNE88TNLNbrIwfh59JsvkntJojqKk-F9s9K5YHOX66Cwu0bQ%3D%3D?uid=0&filename=CoreKeeper_translated_backup&disposition=attachment&hash=9i94YlN70SrJAbo%2B9sr15IuX5E%2Btr64sxjoZ18jCYs7bu5C4ksWT3Pxl6c2bZ3%2Blq/J6bpmRyOJonT3VoXnDag%3D%3D&limit=0&content_type=text%2Fplain&owner_uid=132802752&fsize=1528640&hid=db95a36140f262f97155d5738f9659fc&media_type=text&tknv=v2", path + @"\localization\Localization.csv"); //yandex
                     Downloading_Files("https://drive.google.com/uc?export=download&id=1zHB5qio3eKNezs5gEMnMYgM1RBrDDaNE&confirm=t&uuid=d4e21369-10c5-4373-b8b4-944fa67bf364", path + @"\localization\Localization.csv"); //yandex
-                
+
                 progressBar.BeginInvoke((MethodInvoker)(() => progressBar.Value += 1));
                 progressPercent = (progressBar.Value + 1) * 100 / progressBar.Maximum;
                 lblPercent.BeginInvoke((MethodInvoker)(() => lblPercent.Text = progressPercent + "%"));
@@ -1393,6 +1493,11 @@ namespace UTranslator
             {
                 if (!skillsNameCheckTranslate.Checked && !skillsDescriptionCheckTranslate.Checked && !itemsCheckTranslate.Checked && !npcCheckTranslate.Checked && !itemsDesc.Checked)
                 {
+                    dataPath = path + @"\" + gameName + @"\Content\Paks\~mods";
+
+                    if (!Directory.Exists(dataPath))
+                        Directory.CreateDirectory(dataPath);
+
                     if (yandexButton.Checked)
                         //Downloading_Files("https://downloader.disk.yandex.ru/disk/529d0741b43a1bc54acf1b8bf9e3528ba26b0bc80e1eb0b183168402fb854d49/6471e3f5/KDCJoYsET2b29yC03CAOkyOBwRip1O6oXFwDQLB20GI_hNcHC2cL0Cl3a3c5GdU2QlP81drjAPwMYgQgHSCK5A%3D%3D?uid=0&filename=DungeonCrawler_translated_backup&disposition=attachment&hash=lvxiFKJH47VErPpS3%2BkS8JaKlBnb58ZgRxVyCO/pbaY7lDevDVVSgx8g9j8QNdcTq/J6bpmRyOJonT3VoXnDag%3D%3D&limit=0&content_type=application%2Foctet-stream&owner_uid=132802752&fsize=22790573&hid=ca5d746506debd7e81a0c70e16b5fb54&media_type=data&tknv=v2", dataPath + @"\pakchunk0-Windows_0_P.pak"); //yandex
                         Downloading_Files("https://drive.google.com/uc?export=download&id=1WjUKNVbVfW55QAjol2bBSX3Azn4f7IjN&confirm=t&uuid=d4e21369-10c5-4373-b8b4-944fa67bf364", dataPath + @"\pakchunk0-Windows_0_P.pak"); //yandex
@@ -1744,14 +1849,16 @@ namespace UTranslator
                         if (!Directory.Exists(Application.StartupPath + "tmp"))//Создаём временную директорию                                                                                                                                                                                      //в идеале объединить
                             Directory.CreateDirectory(Application.StartupPath + "tmp");                                                                                                                                                                                                            //в идеале объединить
                                                                                                                                                                                                                                                                                                    //в идеале объединить
-                        //Downloading_Files("https://downloader.disk.yandex.ru/disk/f939a99cc8db79e4d0ee966e065a71d6df6c7032248f8c03ea48a7932b2b988a/6473e69a/KDCJoYsET2b29yC03CAOk9bru4FeYiLLH205ePjxXqdAfD-AdfUu3-o-ST5bouHtPA80_UiUvcD78P_pYJ0C9w%3D%3D?uid=0&filename=info.txt&disposition=attachment&hash=HHVBYSQ/UTdMVLTnTXglhfaZhKEjoE%2Btc/IrtCLzNurE7FCkI9O/C45p17AIt0C7q/J6bpmRyOJonT3VoXnDag%3D%3D&limit=0&content_type=text%2Fplain&owner_uid=132802752&fsize=131&hid=1b636fcba57cb706ec9be4189bb0d063&media_type=document&tknv=v2", Application.StartupPath + "tmp\\info.txt");//Загружаем файл с информацией о версии приложения                                                                        //в идеале объединить
+                                                                                                                                                                                                                                                                                                   //Downloading_Files("https://downloader.disk.yandex.ru/disk/f939a99cc8db79e4d0ee966e065a71d6df6c7032248f8c03ea48a7932b2b988a/6473e69a/KDCJoYsET2b29yC03CAOk9bru4FeYiLLH205ePjxXqdAfD-AdfUu3-o-ST5bouHtPA80_UiUvcD78P_pYJ0C9w%3D%3D?uid=0&filename=info.txt&disposition=attachment&hash=HHVBYSQ/UTdMVLTnTXglhfaZhKEjoE%2Btc/IrtCLzNurE7FCkI9O/C45p17AIt0C7q/J6bpmRyOJonT3VoXnDag%3D%3D&limit=0&content_type=text%2Fplain&owner_uid=132802752&fsize=131&hid=1b636fcba57cb706ec9be4189bb0d063&media_type=document&tknv=v2", Application.StartupPath + "tmp\\info.txt");//Загружаем файл с информацией о версии приложения                                                                        //в идеале объединить
                         Downloading_Files("https://cloclo51.cloud.mail.ru/weblink/view/PDGf/x9oxppGd5", Application.StartupPath + "tmp\\info.txt");//Загружаем файл с информацией о версии приложения                                                                        //в идеале объединить
-                                                                                                                                                                         //в идеале объединить
+                                                                                                                                                   //в идеале объединить
+                        System.Threading.Thread.Sleep(5000);
+
                         string[] tmpLines = File.ReadAllLines(Application.StartupPath + "tmp\\info.txt");//Считываем первую строку, в ней указана версия                                                                                                                                           //в идеале объединить
                         string ver = tmpLines[4].Replace("mortuary_ver = ", "");                                                                                                                                                                                                                   //в идеале объединить
                                                                                                                                                                                                                                                                                                    //в идеале объединить
                         startInstallReadeTrasnlateMessage = $"Учтите, что пиратка обязательно должна быть версии {ver}!\nУстановить машинный перевод?";     //в идеале объединить
-                                                                                                                                                                                                                                                                                                   //в идеале объединить
+                                                                                                                                                            //в идеале объединить
                         if (File.Exists(Application.StartupPath + "tmp\\info.txt"))//Удаляем старый файл с информацией о последнем патче                                                                                                                                                           //в идеале объединить
                             Directory.Delete(Application.StartupPath + "tmp", true);                                                                                                                                                                                                               //в идеале объединить
                     }                                                                                                                                                                                                                                                                              //в идеале объединить
@@ -1763,9 +1870,12 @@ namespace UTranslator
                         if (!Directory.Exists(Application.StartupPath + "tmp"))//Создаём временную директорию                                                                                                                                                                                      //в идеале объединить
                             Directory.CreateDirectory(Application.StartupPath + "tmp");                                                                                                                                                                                                            //в идеале объединить
                                                                                                                                                                                                                                                                                                    //в идеале объединить
-                        //Downloading_Files("https://downloader.disk.yandex.ru/disk/f939a99cc8db79e4d0ee966e065a71d6df6c7032248f8c03ea48a7932b2b988a/6473e69a/KDCJoYsET2b29yC03CAOk9bru4FeYiLLH205ePjxXqdAfD-AdfUu3-o-ST5bouHtPA80_UiUvcD78P_pYJ0C9w%3D%3D?uid=0&filename=info.txt&disposition=attachment&hash=HHVBYSQ/UTdMVLTnTXglhfaZhKEjoE%2Btc/IrtCLzNurE7FCkI9O/C45p17AIt0C7q/J6bpmRyOJonT3VoXnDag%3D%3D&limit=0&content_type=text%2Fplain&owner_uid=132802752&fsize=131&hid=1b636fcba57cb706ec9be4189bb0d063&media_type=document&tknv=v2", Application.StartupPath + "tmp\\info.txt");//Загружаем файл с информацией о версии приложения                                                                        //в идеале объединить
+                                                                                                                                                                                                                                                                                                   //Downloading_Files("https://downloader.disk.yandex.ru/disk/f939a99cc8db79e4d0ee966e065a71d6df6c7032248f8c03ea48a7932b2b988a/6473e69a/KDCJoYsET2b29yC03CAOk9bru4FeYiLLH205ePjxXqdAfD-AdfUu3-o-ST5bouHtPA80_UiUvcD78P_pYJ0C9w%3D%3D?uid=0&filename=info.txt&disposition=attachment&hash=HHVBYSQ/UTdMVLTnTXglhfaZhKEjoE%2Btc/IrtCLzNurE7FCkI9O/C45p17AIt0C7q/J6bpmRyOJonT3VoXnDag%3D%3D&limit=0&content_type=text%2Fplain&owner_uid=132802752&fsize=131&hid=1b636fcba57cb706ec9be4189bb0d063&media_type=document&tknv=v2", Application.StartupPath + "tmp\\info.txt");//Загружаем файл с информацией о версии приложения                                                                        //в идеале объединить
                         Downloading_Files("https://cloclo51.cloud.mail.ru/weblink/view/PDGf/x9oxppGd5", Application.StartupPath + "tmp\\info.txt");//Загружаем файл с информацией о версии приложения                                                                        //в идеале объединить
-                                                                                                                                                                         //в идеале объединить
+                                                                                                                                                   //в идеале объединить
+
+                        System.Threading.Thread.Sleep(5000);
+
                         string[] tmpLines = File.ReadAllLines(Application.StartupPath + "tmp\\info.txt");//Считываем первую строку, в ней указана версия                                                                                                                                           //в идеале объединить
                         string ver = "";                                                                                                                                                                                                                                                           //в идеале объединить
                         if (gameName == "CoreKeeper")                                                                                                                                                                                                                                              //в идеале объединить
@@ -1911,7 +2021,7 @@ namespace UTranslator
 
                         if (gameName == "Temtem")
                             delFolder(dataPath + @"\Unity_Assets_Files\resources\Mono\Assembly-CSharp");
-                        
+
                         if (gameName == "Temtem")
                         {
                             delFolder(dataPath + @"\Unity_Assets_Files\resources\Mono");
@@ -2399,7 +2509,9 @@ namespace UTranslator
             {
                 dataPath = path + @"\" + gameName + @"\Content\Paks";
 
-                newFile = new FileInfo(dataPath + @"\pakchunk0-Windows_0_P.pak");
+                //Directory.CreateDirectory(dataPath);
+
+                newFile = new FileInfo(path + @"\" + gameName + @"\Content\Paks" + @"\pakchunk0-Windows_0_P.pak");
             }
             else
                 newFile = new FileInfo(dataPath + @"\resources.assets");
@@ -2411,6 +2523,8 @@ namespace UTranslator
 
                 //Downloading_Files("https://downloader.disk.yandex.ru/disk/f939a99cc8db79e4d0ee966e065a71d6df6c7032248f8c03ea48a7932b2b988a/6473e69a/KDCJoYsET2b29yC03CAOk9bru4FeYiLLH205ePjxXqdAfD-AdfUu3-o-ST5bouHtPA80_UiUvcD78P_pYJ0C9w%3D%3D?uid=0&filename=info.txt&disposition=attachment&hash=HHVBYSQ/UTdMVLTnTXglhfaZhKEjoE%2Btc/IrtCLzNurE7FCkI9O/C45p17AIt0C7q/J6bpmRyOJonT3VoXnDag%3D%3D&limit=0&content_type=text%2Fplain&owner_uid=132802752&fsize=131&hid=1b636fcba57cb706ec9be4189bb0d063&media_type=document&tknv=v2", Application.StartupPath + "tmp\\info.txt");//Загружаем файл с информацией о версии приложения
                 Downloading_Files("https://cloclo51.cloud.mail.ru/weblink/view/PDGf/x9oxppGd5", Application.StartupPath + "tmp\\info.txt");//Загружаем файл с информацией о версии приложения
+
+                System.Threading.Thread.Sleep(5000);
 
                 string[] configLines = File.ReadAllLines(Application.StartupPath + @"UTranslator.config");
                 string cur_ver = "";
@@ -2450,7 +2564,7 @@ namespace UTranslator
                         deleteFile(Application.StartupPath + @$"backup\{gameName}_backup");
                         System.Threading.Thread.Sleep(500);
                         CreateBackupTest();
-
+                        System.Threading.Thread.Sleep(500);
                         deleteFile(dataPath + @"\resources.assets");
                     }
                     deleteFile(Application.StartupPath + @$"backup\{gameName}_translated_backup");
@@ -2609,6 +2723,11 @@ namespace UTranslator
                     {
                         if (!skillsNameCheckTranslate.Checked && !skillsDescriptionCheckTranslate.Checked && !itemsCheckTranslate.Checked && !npcCheckTranslate.Checked && !itemsDesc.Checked)
                         {
+                            dataPath = path + @"\" + gameName + @"\Content\Paks\~mods";
+
+                            if (!Directory.Exists(dataPath))
+                                Directory.CreateDirectory(dataPath);
+
                             if (yandexButton.Checked)
                                 //Downloading_Files("https://downloader.disk.yandex.ru/disk/97edc2170ed427d72a0836abb63031759b7705ee5ba4b15d12e466c21bbe9f53/6471e621/KDCJoYsET2b29yC03CAOkyOBwRip1O6oXFwDQLB20GI_hNcHC2cL0Cl3a3c5GdU2QlP81drjAPwMYgQgHSCK5A%3D%3D?uid=0&filename=DungeonCrawler_translated_backup&disposition=attachment&hash=lvxiFKJH47VErPpS3%2BkS8JaKlBnb58ZgRxVyCO/pbaY7lDevDVVSgx8g9j8QNdcTq/J6bpmRyOJonT3VoXnDag%3D%3D&limit=0&content_type=application%2Foctet-stream&owner_uid=132802752&fsize=22790573&hid=ca5d746506debd7e81a0c70e16b5fb54&media_type=data&tknv=v2", dataPath + @"\pakchunk0-Windows_0_P.pak"); //yandex
                                 Downloading_Files("https://drive.google.com/uc?export=download&id=1WjUKNVbVfW55QAjol2bBSX3Azn4f7IjN&confirm=t&uuid=d4e21369-10c5-4373-b8b4-944fa67bf364", dataPath + @"\pakchunk0-Windows_0_P.pak"); //yandex
@@ -2724,7 +2843,7 @@ namespace UTranslator
                             File.Copy(dataPath + @"\resources.assets", backupPath + gameName + "_translated_backup");
                         else
                             File.Copy(path + @"\localization\Localization.csv", backupPath + gameName + "_translated_backup");
-                        
+
                         if (File.Exists(dataPath + @"\UPacker.exe"))
                             deleteFile(dataPath + @"\UPacker.exe");
                         if (File.Exists(dataPath + @"\UPacker_Advanced.exe"))
@@ -2745,7 +2864,7 @@ namespace UTranslator
                             deleteFile(localizationPath + @"import_uls.bat");
                         if (File.Exists(dataPath + @"\Export_txt.bat"))
                             deleteFile(dataPath + @"\Export_txt.bat");
-                        
+
                         if (Directory.Exists(localizationPath))
                         {
                             delFolder(localizationPath);
@@ -3220,7 +3339,7 @@ namespace UTranslator
                     else if (gameName == "DungeonCrawler")
                     {
                         rowsInFile = File.ReadAllLines(localizationPath + @"Game.locres.txt").Length;
-                        rowsInBackupFile = File.ReadAllLines(backupPath + @"\" + gameName + @"_backup\" + gameName + @"\Content\Localization\Game\en\Game.locres.txt").Length;
+                        rowsInBackupFile = File.ReadAllLines(backupPath + @"\" + gameName + @"_backup_folder\" + gameName + @"\Content\Localization\Game\en\Game.locres.txt").Length;
                     }
                     else if (gameName == "CoreKeeper")
                     {
@@ -3912,7 +4031,7 @@ namespace UTranslator
                         {
                             string[] idValues = idLine.Split(SeparatorDifferentGames());
 
-                            if (idValues[0].Contains("Text_DesignData_Perk_Perk") || idValues[0].Contains("_Spell_Fireball") || idValues[0].Contains("Text_DesignData_Spell_Spell") || idValues[0].Contains("_Property_Perk_"))
+                            if (idValues[0].Contains("Text_DesignData_Perk_Perk") || idValues[0].Contains("_Spell_Fireball") || idValues[0].Contains("Text_DesignData_Spell_Spell") || idValues[0].Contains("_Property_Perk_") || idValues[0].Contains("Text_DesignData_Skill_Skill"))
                             {
                                 if (skillsNameCheckTranslate.Checked)
                                 {
@@ -4242,10 +4361,12 @@ namespace UTranslator
                 if (File.Exists(backupPath + gameName + "_backup"))
                 {
                     File.Copy(backupPath + gameName + "_backup", backupPath + gameName + "_backup.assets");
+                    System.Threading.Thread.Sleep(500);
                     deleteFile(backupPath + gameName + "_backup");
                 }
 
                 File.Copy(backupPath + gameName + "_global_backup", backupPath + "globalgamemanagers.assets");
+                System.Threading.Thread.Sleep(500);
                 deleteFile(backupPath + gameName + "_global_backup");
 
                 if (gameName == "Temtem")
@@ -4298,8 +4419,10 @@ namespace UTranslator
                 deleteFile(backupLocalizationPath + @"\Parser_ULS.exe");
 
                 File.Copy(backupPath + gameName + "_backup.assets", backupPath + gameName + "_backup");
+                System.Threading.Thread.Sleep(500);
                 deleteFile(backupPath + gameName + "_backup.assets");
                 File.Copy(backupPath + "globalgamemanagers.assets", backupPath + gameName + "_global_backup");
+                System.Threading.Thread.Sleep(500);
                 deleteFile(backupPath + "globalgamemanagers.assets");
             }
             else if (gameName == "Escape Simulator" || gameName == "The Mortuary Assistant")
@@ -4309,30 +4432,34 @@ namespace UTranslator
                 else if (gameName == "The Mortuary Assistant" && File.Exists(backupLocalizationPath + @"\Global_English.txt"))
                     return;
 
-                if (File.Exists(backupPath + gameName + "_backup"))
+                if (!File.Exists(backupLocalizationPath + @"\PatreonNamesFemale.txt"))
                 {
-                    File.Copy(backupPath + gameName + "_backup", backupPath + gameName + "_backup.assets");
-                    deleteFile(backupPath + gameName + "_backup");
+
+                    if (File.Exists(backupPath + gameName + "_backup"))
+                    {
+                        File.Copy(backupPath + gameName + "_backup", backupPath + gameName + "_backup.assets");
+                        deleteFile(backupPath + gameName + "_backup");
+                    }
+
+                    File.WriteAllBytesAsync(backupPath + @"\UPacker_Advanced.exe", Resources.UPacker_Advanced_exe);
+                    File.WriteAllTextAsync(backupPath + @"\Export_txt.bat", Resources.Export_txt_bat);
+                    System.Threading.Thread.Sleep(500);
+                    if (gameName == "Escape Simulator")
+                        ReplaceStringInFile(backupPath + @"\Export_txt.bat", 2, @$"for %%a in (*.assets;) do UPacker_Advanced.exe export ""%%a"" -t *English*.txt");
+                    else
+                        ReplaceStringInFile(backupPath + @"\Export_txt.bat", 2, @$"for %%a in (*.assets;) do UPacker_Advanced.exe export ""%%a"" -t txt");
+                    System.Threading.Thread.Sleep(500);
+
+                    Process.Start(new ProcessStartInfo
+                    {
+                        FileName = backupPath + @"\Export_txt.bat",
+                        WorkingDirectory = Path.GetDirectoryName(backupPath + @"\Export_txt.bat"),
+                        CreateNoWindow = true
+                    }).WaitForExit();
+
+                    deleteFile(backupPath + @"\Export_txt.bat");
+                    deleteFile(backupPath + @"\UPacker_Advanced.exe");
                 }
-
-                File.WriteAllBytesAsync(backupPath + @"\UPacker_Advanced.exe", Resources.UPacker_Advanced_exe);
-                File.WriteAllTextAsync(backupPath + @"\Export_txt.bat", Resources.Export_txt_bat);
-                System.Threading.Thread.Sleep(500);
-                if (gameName == "Escape Simulator")
-                    ReplaceStringInFile(backupPath + @"\Export_txt.bat", 2, @$"for %%a in (*.assets;) do UPacker_Advanced.exe export ""%%a"" -t *English*.txt");
-                else
-                    ReplaceStringInFile(backupPath + @"\Export_txt.bat", 2, @$"for %%a in (*.assets;) do UPacker_Advanced.exe export ""%%a"" -t txt");
-                System.Threading.Thread.Sleep(500);
-
-                Process.Start(new ProcessStartInfo
-                {
-                    FileName = backupPath + @"\Export_txt.bat",
-                    WorkingDirectory = Path.GetDirectoryName(backupPath + @"\Export_txt.bat"),
-                    CreateNoWindow = true
-                }).WaitForExit();
-
-                deleteFile(backupPath + @"\Export_txt.bat");
-                deleteFile(backupPath + @"\UPacker_Advanced.exe");
 
                 if (gameName == "The Mortuary Assistant")
                 {
@@ -4344,7 +4471,7 @@ namespace UTranslator
                     deleteFile(backupLocalizationPath + @"\LineBreaking Following Characters.txt");
                     deleteFile(backupLocalizationPath + @"\LineBreaking Leading Characters.txt");
                     deleteFile(backupLocalizationPath + @"\BasementTapeFragment.txt");
-                    deleteFile(backupLocalizationPath + @"LanguageCharacters.txt");
+                    deleteFile(backupLocalizationPath + @"\LanguageCharacters.txt");
                     deleteFile(backupLocalizationPath + @"\BasementTapeWhole.txt");
                     deleteFile(backupLocalizationPath + @"\BibleScrap_00001.txt");
                     deleteFile(backupLocalizationPath + @"\callingThePolice.txt");
@@ -4407,14 +4534,69 @@ namespace UTranslator
                     deleteFile(backupLocalizationPath + @"\ValEvent5_00001.txt");
                     deleteFile(backupLocalizationPath + @"\whisperPenatent_00001.txt");
                     deleteFile(backupLocalizationPath + @"\YouShouldBe.txt");
+                    deleteFile(backupLocalizationPath + @"itemInfoPatch.txt");
+                    deleteFile(backupLocalizationPath + @"itemInfoPatch_00001.txt");
+                    deleteFile(backupLocalizationPath + @"itemInfoPatch_00002.txt");
+                    deleteFile(backupLocalizationPath + @"itemInfoPatch_00003.txt");
+                    deleteFile(backupLocalizationPath + @"itemInfoPatch_00004.txt");
+                    deleteFile(backupLocalizationPath + @"itemInfoPatch_00006.txt");
+                    deleteFile(backupLocalizationPath + @"itemInfoPatch_00007.txt");
+                    deleteFile(backupLocalizationPath + @"itemInfoPatch_00008.txt");
+                    deleteFile(backupLocalizationPath + @"itemInfoPatch_00009.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_ccLines.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_ccLines_00001.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_ccLines_00002.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_ccLines_00003.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_ccLines_00005.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_ccLines_00006.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_ccLines_00007.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_ccLines_00008.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_ccLines_00009.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_ExorcismWIP.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_ExorcismWIP_00004.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_ExorcismWIP_00002.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_ExorcismWIP_00003.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_ExorcismWIP_00005.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_ExorcismWIP_00006.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_ExorcismWIP_00007.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_ExorcismWIP_00008.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_ExorcismWIP_00009.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_Notes.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_Notes_00004.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_Notes_00002.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_Notes_00003.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_Notes_00005.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_Notes_00006.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_Notes_00007.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_Notes_00008.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_Notes_00001.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_UiText.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_UiText_00004.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_UiText_00002.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_UiText_00009.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_UiText_00005.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_UiText_00006.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_UiText_00007.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_UiText_00008.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_UiText_00001.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_VHS_slide.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_VHS_slide_00004.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_VHS_slide_00002.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_VHS_slide_00009.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_VHS_slide_00005.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_VHS_slide_00003.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_VHS_slide_00007.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_VHS_slide_00008.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_VHS_slide_00001.txt");
 
                     string[] backupFilesToRead = Directory.GetFiles(backupLocalizationPath);
 
                     for (int i = 0; i < backupFilesToRead.Length; i++)
                     {
-                        //if (backupFilesToRead[i].Contains("_fr") || backupFilesToRead[i].Contains("_de") || backupFilesToRead[i].Contains("_es") || backupFilesToRead[i].Contains("_it") || backupFilesToRead[i].Contains("_ja")
-                        //    || backupFilesToRead[i].Contains("_ko") || backupFilesToRead[i].Contains("_tr") || backupFilesToRead[i].Contains("_zh_cn"))
-                        if (backupFilesToRead[i].Contains("_fr"))
+                        string checkedFile = backupFilesToRead[i].Replace(backupLocalizationPath, "");
+
+                        if (checkedFile.Contains("_fr") || checkedFile.Contains("_de") || checkedFile.Contains("_es") || checkedFile.Contains("_it") || checkedFile.Contains("_ja")
+                            || checkedFile.Contains("_ko") || checkedFile.Contains("_tr") || checkedFile.Contains("_zh_cn"))
                         {
                             deleteFile(backupFilesToRead[i]);
                         }
@@ -4426,8 +4608,11 @@ namespace UTranslator
                         deleteFile(backupLocalizationPath + @"\EnglishEditor.txt");
                 }
 
-                File.Copy(backupPath + gameName + "_backup.assets", backupPath + gameName + "_backup");
-                deleteFile(backupPath + gameName + "_backup.assets");
+                if (File.Exists(backupPath + gameName + "_backup.assets"))
+                {
+                    File.Copy(backupPath + gameName + "_backup.assets", backupPath + gameName + "_backup");
+                    deleteFile(backupPath + gameName + "_backup.assets");
+                }
             }
             else if (gameName == "NewWorld")
             {
@@ -4534,8 +4719,8 @@ namespace UTranslator
 
                     //if (newRowsCheck)
                     //{
-                        ReplaceStringInFile(backupPath + @"\export_locres.bat", 0, @"quickbms_4gb_files.exe -f Game.locres 4_0.4.27d.bms pakchunk0-Windows_0_P.pak " + gameName + @"_backup_folder");
-                        System.Threading.Thread.Sleep(500);
+                    ReplaceStringInFile(backupPath + @"\export_locres.bat", 0, @"quickbms_4gb_files.exe -f Game.locres 4_0.4.27d.bms pakchunk0-Windows_0_P.pak " + gameName + @"_backup_folder");
+                    System.Threading.Thread.Sleep(500);
                     //}
 
                     Process.Start(new ProcessStartInfo
@@ -4590,6 +4775,8 @@ namespace UTranslator
 
         void unArchivTranslatedBackup()
         {
+            System.Threading.Thread.Sleep(500);
+
             string backupLocalizationPath = backupPath + @"Unity_Assets_Files\" + gameName + @"_translated_backup\Mono\Assembly-CSharp\I2.Loc";
             if (gameName == "CoreKeeper")
                 backupLocalizationPath = backupPath + @"Localization.csv";
@@ -4680,30 +4867,35 @@ namespace UTranslator
                 if (gameName == "The Mortuary Assistant" && File.Exists(backupLocalizationPath + @"\Global_English.txt"))
                     return;
 
-                if (File.Exists(backupPath + gameName + "_translated_backup"))
+                if (!File.Exists(backupLocalizationPath + @"\PatreonNamesFemale.txt"))
                 {
-                    File.Copy(backupPath + gameName + "_translated_backup", backupPath + gameName + "_translated_backup.assets");
-                    deleteFile(backupPath + gameName + "_translated_backup");
+                    if (File.Exists(backupPath + gameName + "_translated_backup"))
+                    {
+                        File.Copy(backupPath + gameName + "_translated_backup", backupPath + gameName + "_translated_backup.assets");
+                        System.Threading.Thread.Sleep(500);
+                        deleteFile(backupPath + gameName + "_translated_backup");
+                    }
+
+                    File.WriteAllBytesAsync(backupPath + @"\UPacker_Advanced.exe", Resources.UPacker_Advanced_exe);
+                    File.WriteAllTextAsync(backupPath + @"\Export_txt.bat", Resources.Export_txt_bat);
+
+                    System.Threading.Thread.Sleep(500);
+                    if (gameName == "Escape Simulator")
+                        ReplaceStringInFile(backupPath + @"\Export_txt.bat", 2, @$"for %%a in (*.assets;) do UPacker_Advanced.exe export ""%%a"" -t *English*.txt");
+                    else
+                        ReplaceStringInFile(backupPath + @"\Export_txt.bat", 2, @$"for %%a in (*.assets;) do UPacker_Advanced.exe export ""%%a"" -t txt");
+                    System.Threading.Thread.Sleep(500);
+
+                    Process.Start(new ProcessStartInfo
+                    {
+                        FileName = backupPath + @"\Export_txt.bat",
+                        WorkingDirectory = Path.GetDirectoryName(backupPath + @"\Export_txt.bat"),
+                        CreateNoWindow = true
+                    }).WaitForExit();
+
+                    deleteFile(backupPath + @"\Export_txt.bat");
+                    deleteFile(backupPath + @"\UPacker_Advanced.exe");
                 }
-
-                File.WriteAllBytesAsync(backupPath + @"\UPacker_Advanced.exe", Resources.UPacker_Advanced_exe);
-                File.WriteAllTextAsync(backupPath + @"\Export_txt.bat", Resources.Export_txt_bat);
-                System.Threading.Thread.Sleep(500);
-                if (gameName == "Escape Simulator")
-                    ReplaceStringInFile(backupPath + @"\Export_txt.bat", 2, @$"for %%a in (*.assets;) do UPacker_Advanced.exe export ""%%a"" -t *English*.txt");
-                else
-                    ReplaceStringInFile(backupPath + @"\Export_txt.bat", 2, @$"for %%a in (*.assets;) do UPacker_Advanced.exe export ""%%a"" -t txt");
-                System.Threading.Thread.Sleep(500);
-
-                Process.Start(new ProcessStartInfo
-                {
-                    FileName = backupPath + @"\Export_txt.bat",
-                    WorkingDirectory = Path.GetDirectoryName(backupPath + @"\Export_txt.bat"),
-                    CreateNoWindow = true
-                }).WaitForExit();
-
-                deleteFile(backupPath + @"\Export_txt.bat");
-                deleteFile(backupPath + @"\UPacker_Advanced.exe");
 
                 if (gameName == "The Mortuary Assistant")
                 {
@@ -4715,7 +4907,7 @@ namespace UTranslator
                     deleteFile(backupLocalizationPath + @"\LineBreaking Following Characters.txt");
                     deleteFile(backupLocalizationPath + @"\LineBreaking Leading Characters.txt");
                     deleteFile(backupLocalizationPath + @"\BasementTapeFragment.txt");
-                    deleteFile(backupLocalizationPath + @"LanguageCharacters.txt");
+                    deleteFile(backupLocalizationPath + @"\LanguageCharacters.txt");
                     deleteFile(backupLocalizationPath + @"\BasementTapeWhole.txt");
                     deleteFile(backupLocalizationPath + @"\BibleScrap_00001.txt");
                     deleteFile(backupLocalizationPath + @"\callingThePolice.txt");
@@ -4778,14 +4970,69 @@ namespace UTranslator
                     deleteFile(backupLocalizationPath + @"\ValEvent5_00001.txt");
                     deleteFile(backupLocalizationPath + @"\whisperPenatent_00001.txt");
                     deleteFile(backupLocalizationPath + @"\YouShouldBe.txt");
+                    deleteFile(backupLocalizationPath + @"itemInfoPatch.txt");
+                    deleteFile(backupLocalizationPath + @"itemInfoPatch_00001.txt");
+                    deleteFile(backupLocalizationPath + @"itemInfoPatch_00002.txt");
+                    deleteFile(backupLocalizationPath + @"itemInfoPatch_00003.txt");
+                    deleteFile(backupLocalizationPath + @"itemInfoPatch_00004.txt");
+                    deleteFile(backupLocalizationPath + @"itemInfoPatch_00006.txt");
+                    deleteFile(backupLocalizationPath + @"itemInfoPatch_00007.txt");
+                    deleteFile(backupLocalizationPath + @"itemInfoPatch_00008.txt");
+                    deleteFile(backupLocalizationPath + @"itemInfoPatch_00009.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_ccLines.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_ccLines_00001.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_ccLines_00002.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_ccLines_00003.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_ccLines_00005.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_ccLines_00006.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_ccLines_00007.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_ccLines_00008.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_ccLines_00009.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_ExorcismWIP.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_ExorcismWIP_00004.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_ExorcismWIP_00002.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_ExorcismWIP_00003.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_ExorcismWIP_00005.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_ExorcismWIP_00006.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_ExorcismWIP_00007.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_ExorcismWIP_00008.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_ExorcismWIP_00009.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_Notes.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_Notes_00004.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_Notes_00002.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_Notes_00003.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_Notes_00005.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_Notes_00006.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_Notes_00007.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_Notes_00008.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_Notes_00001.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_UiText.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_UiText_00004.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_UiText_00002.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_UiText_00009.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_UiText_00005.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_UiText_00006.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_UiText_00007.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_UiText_00008.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_UiText_00001.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_VHS_slide.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_VHS_slide_00004.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_VHS_slide_00002.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_VHS_slide_00009.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_VHS_slide_00005.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_VHS_slide_00003.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_VHS_slide_00007.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_VHS_slide_00008.txt");
+                    deleteFile(backupLocalizationPath + @"Patch_VHS_slide_00001.txt");
 
                     string[] backupFilesToRead = Directory.GetFiles(backupLocalizationPath);
 
                     for (int i = 0; i < backupFilesToRead.Length; i++)
                     {
-                        //if (backupFilesToRead[i].Contains("_fr") || backupFilesToRead[i].Contains("_de") || backupFilesToRead[i].Contains("_es") || backupFilesToRead[i].Contains("_it") || backupFilesToRead[i].Contains("_ja")
-                        //    || backupFilesToRead[i].Contains("_ko") || backupFilesToRead[i].Contains("_tr") || backupFilesToRead[i].Contains("_zh_cn"))
-                        if (backupFilesToRead[i].Contains("_fr"))
+                        string checkedFile = backupFilesToRead[i].Replace(backupLocalizationPath, "");
+
+                        if (checkedFile.Contains("_fr") || checkedFile.Contains("_de") || checkedFile.Contains("_es") || checkedFile.Contains("_it") || checkedFile.Contains("_ja")
+                            || checkedFile.Contains("_ko") || checkedFile.Contains("_tr") || checkedFile.Contains("_zh_cn"))
                         {
                             deleteFile(backupFilesToRead[i]);
                         }
@@ -4799,8 +5046,11 @@ namespace UTranslator
 
                 if (!translateReinstall)
                 {
-                    File.Copy(backupPath + gameName + "_translated_backup.assets", backupPath + gameName + "_translated_backup");
-                    deleteFile(backupPath + gameName + "_translated_backup.assets");
+                    if (File.Exists(backupPath + gameName + "_translated_backup.assets"))
+                    {
+                        File.Copy(backupPath + gameName + "_translated_backup.assets", backupPath + gameName + "_translated_backup");
+                        deleteFile(backupPath + gameName + "_translated_backup.assets");
+                    }
                 }
             }
             else if (gameName == "NewWorld")
@@ -4836,8 +5086,8 @@ namespace UTranslator
 
                     //if (newRowsCheck)
                     //{
-                        ReplaceStringInFile(backupPath + @"\export_locres.bat", 0, @"quickbms_4gb_files.exe -f Game.locres 4_0.4.27d.bms pakchunk0-Windows_0_P.pak " + gameName + @"_translated_backup_folder");
-                        System.Threading.Thread.Sleep(500);
+                    ReplaceStringInFile(backupPath + @"\export_locres.bat", 0, @"quickbms_4gb_files.exe -f Game.locres 4_0.4.27d.bms pakchunk0-Windows_0_P.pak " + gameName + @"_translated_backup_folder");
+                    System.Threading.Thread.Sleep(500);
                     //}
 
                     Process.Start(new ProcessStartInfo
@@ -5191,7 +5441,7 @@ namespace UTranslator
                         WorkingDirectory = Path.GetDirectoryName(localizationPath + @"unpack_CX.bat"),
                         CreateNoWindow = true
                     }).WaitForExit();
-                    
+
                     deleteFile(fileToRead);
                     System.Threading.Thread.Sleep(500);
 
@@ -5266,7 +5516,7 @@ namespace UTranslator
                                         if (idValuesGlobal[0] == idValues[0] && oldValues == newValues)
                                         {
                                             exist = true;
-                                            
+
                                             break;
                                         }
                                         //else if (idValuesGlobal[0] == idValues[0] && oldValues != newValues)
@@ -5564,7 +5814,7 @@ namespace UTranslator
                             {
                                 string[] idValues = line.Split(SeparatorDifferentGames());
 
-                                
+
                                 string newValues = idValues[1];
 
                                 //idValues[1] = idValues[1].Trim();
@@ -8556,315 +8806,315 @@ namespace UTranslator
                     else if (gameName == "nwr")
                         count = curlyBracketValues.Count + triangQuoteValues.Count;
 
-                        result = result.Replace("&lt;236 &gt;", "<236>");
-                        result = result.Replace("&lt;216 &gt;", "<216>");
-                        result = result.Replace("&lt; 236&gt;", "<236>");
-                        result = result.Replace("&lt; 216&gt;", "<216>");
-                        result = result.Replace("&lt; 236 &gt;", "<236>");
-                        result = result.Replace("&lt; 216 &gt;", "<216>");
-                        result = result.Replace("&lt;213 &gt;", "<213>");
-                        result = result.Replace("&lt; 213&gt;", "<213>");
-                        result = result.Replace("&lt; 213 &gt;", "<213>");
-                        result = result.Replace("&lt;216&gt;", "<216>");
-                        result = result.Replace("&lt;213&gt;", "<213>");
-                        result = result.Replace("&lt;230 &gt;", "<230>");
-                        result = result.Replace("&lt;231 &gt;", "<231>");
-                        result = result.Replace("&lt;235 &gt;", "<235>");
-                        result = result.Replace("&lt;234 &gt;", "<234>");
-                        result = result.Replace("&lt; 230&gt;", "<230>");
-                        result = result.Replace("&lt; 231&gt;", "<231>");
-                        result = result.Replace("&lt; 235&gt;", "<235>");
-                        result = result.Replace("&lt; 234&gt;", "<234>");
-                        result = result.Replace("&lt; 230 &gt;", "<230>");
-                        result = result.Replace("&lt; 231 &gt;", "<231>");
-                        result = result.Replace("&lt; 235 &gt;", "<235>");
-                        result = result.Replace("&lt; 234 &gt;", "<234>");
-                        result = result.Replace("&lt;230&gt;", "<230>");
-                        result = result.Replace("&lt;231&gt;", "<231>");
-                        result = result.Replace("&lt;235&gt;", "<235>");
-                        result = result.Replace("&lt;234&gt;", "<234>");
+                    result = result.Replace("&lt;236 &gt;", "<236>");
+                    result = result.Replace("&lt;216 &gt;", "<216>");
+                    result = result.Replace("&lt; 236&gt;", "<236>");
+                    result = result.Replace("&lt; 216&gt;", "<216>");
+                    result = result.Replace("&lt; 236 &gt;", "<236>");
+                    result = result.Replace("&lt; 216 &gt;", "<216>");
+                    result = result.Replace("&lt;213 &gt;", "<213>");
+                    result = result.Replace("&lt; 213&gt;", "<213>");
+                    result = result.Replace("&lt; 213 &gt;", "<213>");
+                    result = result.Replace("&lt;216&gt;", "<216>");
+                    result = result.Replace("&lt;213&gt;", "<213>");
+                    result = result.Replace("&lt;230 &gt;", "<230>");
+                    result = result.Replace("&lt;231 &gt;", "<231>");
+                    result = result.Replace("&lt;235 &gt;", "<235>");
+                    result = result.Replace("&lt;234 &gt;", "<234>");
+                    result = result.Replace("&lt; 230&gt;", "<230>");
+                    result = result.Replace("&lt; 231&gt;", "<231>");
+                    result = result.Replace("&lt; 235&gt;", "<235>");
+                    result = result.Replace("&lt; 234&gt;", "<234>");
+                    result = result.Replace("&lt; 230 &gt;", "<230>");
+                    result = result.Replace("&lt; 231 &gt;", "<231>");
+                    result = result.Replace("&lt; 235 &gt;", "<235>");
+                    result = result.Replace("&lt; 234 &gt;", "<234>");
+                    result = result.Replace("&lt;230&gt;", "<230>");
+                    result = result.Replace("&lt;231&gt;", "<231>");
+                    result = result.Replace("&lt;235&gt;", "<235>");
+                    result = result.Replace("&lt;234&gt;", "<234>");
 
-                        int translatedCount = result.Split("&gt;").Length - 1;
-                        //int translatedSayingCount = result.Split(" - - ").Length - 1;
+                    int translatedCount = result.Split("&gt;").Length - 1;
+                    //int translatedSayingCount = result.Split(" - - ").Length - 1;
 
-                        if (count != translatedCount) //if (count != translatedCount || saying3 != translatedSayingCount)
+                    if (count != translatedCount) //if (count != translatedCount || saying3 != translatedSayingCount)
+                    {
+                        try
+                        {
+                            driver.FindElement(By.XPath("//*[@id=\"panelTranslateText\"]/div[1]/div[2]/section[2]/div[1]/div[2]/div/div/div[1]/div/div/span/span/span/button")).Click();
+                        }
+                        catch
                         {
                             try
                             {
-                                driver.FindElement(By.XPath("//*[@id=\"panelTranslateText\"]/div[1]/div[2]/section[2]/div[1]/div[2]/div/div/div[1]/div/div/span/span/span/button")).Click();
+                                driver.FindElement(By.XPath("//*[@id=\"headlessui-popover-button-3\"]")).Click();
                             }
                             catch
                             {
-                                try
-                                {
-                                    driver.FindElement(By.XPath("//*[@id=\"headlessui-popover-button-3\"]")).Click();
-                                }
-                                catch
-                                {
 
-                                }
                             }
-                            System.Threading.Thread.Sleep(500);
-                            for (int b = deeplInformal; b < 9999; b++)
-                            {
-                                try
-                                {
-                                    driver.FindElement(By.XPath("//*[@id=\"headlessui-popover-panel-" + b.ToString() + "\"]/div/button[2]")).Click();
-                                    deeplInformal = b;
-                                    break;
-                                }
-                                catch
-                                { }
-                            }
-                            System.Threading.Thread.Sleep(500);
-
+                        }
+                        System.Threading.Thread.Sleep(500);
+                        for (int b = deeplInformal; b < 9999; b++)
+                        {
                             try
                             {
-                                int t = 0;
+                                driver.FindElement(By.XPath("//*[@id=\"headlessui-popover-panel-" + b.ToString() + "\"]/div/button[2]")).Click();
+                                deeplInformal = b;
+                                break;
+                            }
+                            catch
+                            { }
+                        }
+                        System.Threading.Thread.Sleep(500);
 
-                                while (driver.FindElement(By.XPath("//*[@id=\"panelTranslateText\"]/div[1]/div[2]/section[2]/div[3]/div[4]/ul/li/button")).GetAttribute("innerHTML").Length <= 4/*2*/ ||
-                                    driver.FindElement(By.XPath("//*[@id=\"panelTranslateText\"]/div[1]/div[2]/section[2]/div[3]/div[4]/ul/li/button")).GetAttribute("innerHTML") == "" ||
-                                    driver.FindElement(By.XPath("//*[@id=\"panelTranslateText\"]/div[1]/div[2]/section[2]/div[3]/div[4]/ul/li/button")).GetAttribute("innerHTML") == " " ||
-                                    driver.FindElement(By.XPath("//*[@id=\"panelTranslateText\"]/div[1]/div[2]/section[2]/div[3]/div[4]/ul/li/button")).GetAttribute("innerHTML") == "..." ||
-                                    driver.FindElement(By.XPath("//*[@id=\"panelTranslateText\"]/div[1]/div[2]/section[2]/div[3]/div[4]/ul/li/button")).GetAttribute("innerHTML") == "\"" ||
-                                    driver.FindElement(By.XPath("//*[@id=\"panelTranslateText\"]/div[1]/div[2]/section[2]/div[3]/div[4]/ul/li/button")).GetAttribute("innerHTML") == @"""" ||
-                                    driver.FindElement(By.XPath("//*[@id=\"panelTranslateText\"]/div[1]/div[2]/section[2]/div[3]/div[4]/ul/li/button")).GetAttribute("innerHTML").Contains("[...]") ||
-                                    driver.FindElement(By.XPath("//*[@id=\"panelTranslateText\"]/div[3]/section[2]/div[3]/div[3]")).Displayed ||
-                                    driver.FindElement(By.XPath("//*[@id=\"translator-progress-close\"]")).Displayed ||
-                                    driver.FindElement(By.XPath("//*[@id=\"panelTranslateText\"]/div[1]/div[2]/section[2]/div[3]/div[4]/ul/li/button")).GetAttribute("innerHTML") == "lt" ||
-                                    driver.FindElement(By.XPath("//*[@id=\"panelTranslateText\"]/div[1]/div[2]/section[2]/div[3]/div[4]/ul/li/button")).GetAttribute("innerHTML") == "&lt;" ||
-                                    driver.FindElement(By.XPath("//*[@id=\"panelTranslateText\"]/div[1]/div[2]/section[2]/div[3]/div[4]/ul/li/button")).GetAttribute("innerHTML") == "&lt" ||
-                                    driver.FindElement(By.XPath("//*[@id=\"panelTranslateText\"]/div[1]/div[2]/section[2]/div[3]/div[4]/ul/li/button")).GetAttribute("innerHTML") == "<")
+                        try
+                        {
+                            int t = 0;
+
+                            while (driver.FindElement(By.XPath("//*[@id=\"panelTranslateText\"]/div[1]/div[2]/section[2]/div[3]/div[4]/ul/li/button")).GetAttribute("innerHTML").Length <= 4/*2*/ ||
+                                driver.FindElement(By.XPath("//*[@id=\"panelTranslateText\"]/div[1]/div[2]/section[2]/div[3]/div[4]/ul/li/button")).GetAttribute("innerHTML") == "" ||
+                                driver.FindElement(By.XPath("//*[@id=\"panelTranslateText\"]/div[1]/div[2]/section[2]/div[3]/div[4]/ul/li/button")).GetAttribute("innerHTML") == " " ||
+                                driver.FindElement(By.XPath("//*[@id=\"panelTranslateText\"]/div[1]/div[2]/section[2]/div[3]/div[4]/ul/li/button")).GetAttribute("innerHTML") == "..." ||
+                                driver.FindElement(By.XPath("//*[@id=\"panelTranslateText\"]/div[1]/div[2]/section[2]/div[3]/div[4]/ul/li/button")).GetAttribute("innerHTML") == "\"" ||
+                                driver.FindElement(By.XPath("//*[@id=\"panelTranslateText\"]/div[1]/div[2]/section[2]/div[3]/div[4]/ul/li/button")).GetAttribute("innerHTML") == @"""" ||
+                                driver.FindElement(By.XPath("//*[@id=\"panelTranslateText\"]/div[1]/div[2]/section[2]/div[3]/div[4]/ul/li/button")).GetAttribute("innerHTML").Contains("[...]") ||
+                                driver.FindElement(By.XPath("//*[@id=\"panelTranslateText\"]/div[3]/section[2]/div[3]/div[3]")).Displayed ||
+                                driver.FindElement(By.XPath("//*[@id=\"translator-progress-close\"]")).Displayed ||
+                                driver.FindElement(By.XPath("//*[@id=\"panelTranslateText\"]/div[1]/div[2]/section[2]/div[3]/div[4]/ul/li/button")).GetAttribute("innerHTML") == "lt" ||
+                                driver.FindElement(By.XPath("//*[@id=\"panelTranslateText\"]/div[1]/div[2]/section[2]/div[3]/div[4]/ul/li/button")).GetAttribute("innerHTML") == "&lt;" ||
+                                driver.FindElement(By.XPath("//*[@id=\"panelTranslateText\"]/div[1]/div[2]/section[2]/div[3]/div[4]/ul/li/button")).GetAttribute("innerHTML") == "&lt" ||
+                                driver.FindElement(By.XPath("//*[@id=\"panelTranslateText\"]/div[1]/div[2]/section[2]/div[3]/div[4]/ul/li/button")).GetAttribute("innerHTML") == "<")
+                            {
+                                System.Threading.Thread.Sleep(500);
+                                t = t + 1;
+
+                                if (t > 30 && installBreak)
                                 {
+                                    break;
+                                }
+                                else if (t > 30 && !installBreak)
+                                {
+                                    driver.Close();
+                                    driver.Quit();
+                                    driver = null;
+
+                                    //if (Process.GetProcessesByName("geckodriver").Length > 0)
+                                    cmdKill("geckodriver.exe");
+                                    //if (Process.GetProcessesByName("firefox").Length > 0)
+                                    cmdKill("firefox.exe");
                                     System.Threading.Thread.Sleep(500);
-                                    t = t + 1;
+                                    deleteFile(Application.StartupPath + @"geckodriver.exe");
+                                    System.Threading.Thread.Sleep(500);
 
-                                    if (t > 30 && installBreak)
+                                    if (!File.Exists(Application.StartupPath + @"geckodriver.exe"))
+                                        File.WriteAllBytesAsync(Application.StartupPath + @"geckodriver.exe", Resources.geckodriver_exe);
+
+                                    System.Threading.Thread.Sleep(500);
+
+                                    FirefoxOptions firefoxOptions = new FirefoxOptions();
+                                    FirefoxDriverService firefoxService = FirefoxDriverService.CreateDefaultService();
+
+                                    #region proxies
+                                    if (portEnabled == 0)
                                     {
-                                        break;
+                                        //var myProxy = "login:pass@proxy:port";
+                                        string port = "8110";
+                                        string myProxy = "fcetxjzg:lrdyxa7zqqcf@45.94.47.66:8110";
+                                        firefoxOptions.SetPreference("network.proxy.type", 1);
+                                        firefoxOptions.SetPreference("network.proxy.http", myProxy);
+                                        firefoxOptions.SetPreference("network.proxy.http_port", port);
+
+                                        portEnabled = 1;
                                     }
-                                    else if (t > 30 && !installBreak)
+                                    else if (portEnabled == 1)
                                     {
-                                        driver.Close();
-                                        driver.Quit();
-                                        driver = null;
+                                        string port = "8133";
+                                        string myProxy = "fcetxjzg:lrdyxa7zqqcf@45.155.68.129:8133";
+                                        firefoxOptions.SetPreference("network.proxy.type", 1);
+                                        firefoxOptions.SetPreference("network.proxy.http", myProxy);
+                                        firefoxOptions.SetPreference("network.proxy.http_port", port);
 
-                                        //if (Process.GetProcessesByName("geckodriver").Length > 0)
-                                        cmdKill("geckodriver.exe");
-                                        //if (Process.GetProcessesByName("firefox").Length > 0)
-                                        cmdKill("firefox.exe");
+                                        portEnabled = 2;
+                                    }
+                                    else if (portEnabled == 2)
+                                    {
+                                        string port = "7300";
+                                        string myProxy = "fcetxjzg:lrdyxa7zqqcf@185.199.228.220:7300";
+                                        firefoxOptions.SetPreference("network.proxy.type", 1);
+                                        firefoxOptions.SetPreference("network.proxy.http", myProxy);
+                                        firefoxOptions.SetPreference("network.proxy.http_port", port);
+
+                                        portEnabled = 3;
+                                    }
+                                    else if (portEnabled == 3)
+                                    {
+                                        string port = "8382";
+                                        string myProxy = "fcetxjzg:lrdyxa7zqqcf@185.199.231.45:8382";
+                                        firefoxOptions.SetPreference("network.proxy.type", 1);
+                                        firefoxOptions.SetPreference("network.proxy.http", myProxy);
+                                        firefoxOptions.SetPreference("network.proxy.http_port", port);
+
+                                        portEnabled = 4;
+                                    }
+                                    else if (portEnabled == 4)
+                                    {
+                                        string port = "6286";
+                                        string myProxy = "fcetxjzg:lrdyxa7zqqcf@188.74.210.207:6286";
+                                        firefoxOptions.SetPreference("network.proxy.type", 1);
+                                        firefoxOptions.SetPreference("network.proxy.http", myProxy);
+                                        firefoxOptions.SetPreference("network.proxy.http_port", port);
+
+                                        portEnabled = 5;
+                                    }
+                                    else if (portEnabled == 5)
+                                    {
+                                        string port = "6100";
+                                        string myProxy = "fcetxjzg:lrdyxa7zqqcf@188.74.210.21:6100";
+                                        firefoxOptions.SetPreference("network.proxy.type", 1);
+                                        firefoxOptions.SetPreference("network.proxy.http", myProxy);
+                                        firefoxOptions.SetPreference("network.proxy.http_port", port);
+
+                                        portEnabled = 6;
+                                    }
+                                    else if (portEnabled == 6)
+                                    {
+                                        string port = "8279";
+                                        string myProxy = "fcetxjzg:lrdyxa7zqqcf@188.74.183.10:8279";
+                                        firefoxOptions.SetPreference("network.proxy.type", 1);
+                                        firefoxOptions.SetPreference("network.proxy.http", myProxy);
+                                        firefoxOptions.SetPreference("network.proxy.http_port", port);
+
+                                        portEnabled = 7;
+                                    }
+                                    else if (portEnabled == 7)
+                                    {
+                                        string port = "6893";
+                                        string myProxy = "fcetxjzg:lrdyxa7zqqcf@154.95.36.199:6893";
+                                        firefoxOptions.SetPreference("network.proxy.type", 1);
+                                        firefoxOptions.SetPreference("network.proxy.http", myProxy);
+                                        firefoxOptions.SetPreference("network.proxy.http_port", port);
+
+                                        portEnabled = 8;
+                                    }
+                                    else if (portEnabled == 8)
+                                    {
+                                        string port = "7492";
+                                        string myProxy = "fcetxjzg:lrdyxa7zqqcf@185.199.229.156:7492";
+                                        firefoxOptions.SetPreference("network.proxy.type", 1);
+                                        firefoxOptions.SetPreference("network.proxy.http", myProxy);
+                                        firefoxOptions.SetPreference("network.proxy.http_port", port);
+
+                                        portEnabled = 9;
+                                    }
+                                    else if (portEnabled == 9)
+                                    {
+                                        string port = "8780";
+                                        string myProxy = "fcetxjzg:lrdyxa7zqqcf@144.168.217.88:8780";
+                                        firefoxOptions.SetPreference("network.proxy.type", 1);
+                                        firefoxOptions.SetPreference("network.proxy.http", myProxy);
+                                        firefoxOptions.SetPreference("network.proxy.http_port", port);
+
+                                        portEnabled = 10;
+                                    }
+                                    else if (portEnabled == 10)
+                                    {
+                                        portEnabled = 0;
+
+                                        MessageBox.Show(
+                                            "Proxy is out",
+                                            "Proxy 10",
+                                            MessageBoxButtons.OK,
+                                            MessageBoxIcon.Error,
+                                            MessageBoxDefaultButton.Button1,
+                                            MessageBoxOptions.DefaultDesktopOnly);
+                                    }
+                                    #endregion
+
+                                    firefoxService.HideCommandPromptWindow = true;
+                                    firefoxOptions.AddArguments("--headless");
+
+                                    driver = new FirefoxDriver(firefoxService, firefoxOptions)
+                                    {
+                                        Url = "https://www.deepl.com/translator"
+                                    };
+
+                                    System.Threading.Thread.Sleep(5000);
+
+                                    try
+                                    {
+                                        driver.FindElement(By.XPath("//*[@dl-test=\"cookie-banner-lax-close-button\"]")).Click();
                                         System.Threading.Thread.Sleep(500);
-                                        deleteFile(Application.StartupPath + @"geckodriver.exe");
-                                        System.Threading.Thread.Sleep(500);
+                                    }
+                                    catch
+                                    {
+                                    }
 
-                                        if (!File.Exists(Application.StartupPath + @"geckodriver.exe"))
-                                            File.WriteAllBytesAsync(Application.StartupPath + @"geckodriver.exe", Resources.geckodriver_exe);
+                                    driver.FindElement(By.XPath("//*[@dl-test=\"translator-target-lang-btn\"]")).Click();
+                                    System.Threading.Thread.Sleep(500);
+                                    driver.FindElement(By.XPath("//*[@dl-test=\"translator-lang-option-ru\"]")).Click();
+                                    System.Threading.Thread.Sleep(500);
 
-                                        System.Threading.Thread.Sleep(500);
+                                    try
+                                    {
+                                        var clearButton = driver.FindElement(By.XPath("//*[@id=\"panelTranslateText\"]/div[3]/section[1]/div[2]/div/span/span/span/button"));
+                                        ((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(document.body.scrollHeight,0);");
 
-                                        FirefoxOptions firefoxOptions = new FirefoxOptions();
-                                        FirefoxDriverService firefoxService = FirefoxDriverService.CreateDefaultService();
-
-                                        #region proxies
-                                        if (portEnabled == 0)
-                                        {
-                                            //var myProxy = "login:pass@proxy:port";
-                                            string port = "8110";
-                                            string myProxy = "fcetxjzg:lrdyxa7zqqcf@45.94.47.66:8110";
-                                            firefoxOptions.SetPreference("network.proxy.type", 1);
-                                            firefoxOptions.SetPreference("network.proxy.http", myProxy);
-                                            firefoxOptions.SetPreference("network.proxy.http_port", port);
-
-                                            portEnabled = 1;
-                                        }
-                                        else if (portEnabled == 1)
-                                        {
-                                            string port = "8133";
-                                            string myProxy = "fcetxjzg:lrdyxa7zqqcf@45.155.68.129:8133";
-                                            firefoxOptions.SetPreference("network.proxy.type", 1);
-                                            firefoxOptions.SetPreference("network.proxy.http", myProxy);
-                                            firefoxOptions.SetPreference("network.proxy.http_port", port);
-
-                                            portEnabled = 2;
-                                        }
-                                        else if (portEnabled == 2)
-                                        {
-                                            string port = "7300";
-                                            string myProxy = "fcetxjzg:lrdyxa7zqqcf@185.199.228.220:7300";
-                                            firefoxOptions.SetPreference("network.proxy.type", 1);
-                                            firefoxOptions.SetPreference("network.proxy.http", myProxy);
-                                            firefoxOptions.SetPreference("network.proxy.http_port", port);
-
-                                            portEnabled = 3;
-                                        }
-                                        else if (portEnabled == 3)
-                                        {
-                                            string port = "8382";
-                                            string myProxy = "fcetxjzg:lrdyxa7zqqcf@185.199.231.45:8382";
-                                            firefoxOptions.SetPreference("network.proxy.type", 1);
-                                            firefoxOptions.SetPreference("network.proxy.http", myProxy);
-                                            firefoxOptions.SetPreference("network.proxy.http_port", port);
-
-                                            portEnabled = 4;
-                                        }
-                                        else if (portEnabled == 4)
-                                        {
-                                            string port = "6286";
-                                            string myProxy = "fcetxjzg:lrdyxa7zqqcf@188.74.210.207:6286";
-                                            firefoxOptions.SetPreference("network.proxy.type", 1);
-                                            firefoxOptions.SetPreference("network.proxy.http", myProxy);
-                                            firefoxOptions.SetPreference("network.proxy.http_port", port);
-
-                                            portEnabled = 5;
-                                        }
-                                        else if (portEnabled == 5)
-                                        {
-                                            string port = "6100";
-                                            string myProxy = "fcetxjzg:lrdyxa7zqqcf@188.74.210.21:6100";
-                                            firefoxOptions.SetPreference("network.proxy.type", 1);
-                                            firefoxOptions.SetPreference("network.proxy.http", myProxy);
-                                            firefoxOptions.SetPreference("network.proxy.http_port", port);
-
-                                            portEnabled = 6;
-                                        }
-                                        else if (portEnabled == 6)
-                                        {
-                                            string port = "8279";
-                                            string myProxy = "fcetxjzg:lrdyxa7zqqcf@188.74.183.10:8279";
-                                            firefoxOptions.SetPreference("network.proxy.type", 1);
-                                            firefoxOptions.SetPreference("network.proxy.http", myProxy);
-                                            firefoxOptions.SetPreference("network.proxy.http_port", port);
-
-                                            portEnabled = 7;
-                                        }
-                                        else if (portEnabled == 7)
-                                        {
-                                            string port = "6893";
-                                            string myProxy = "fcetxjzg:lrdyxa7zqqcf@154.95.36.199:6893";
-                                            firefoxOptions.SetPreference("network.proxy.type", 1);
-                                            firefoxOptions.SetPreference("network.proxy.http", myProxy);
-                                            firefoxOptions.SetPreference("network.proxy.http_port", port);
-
-                                            portEnabled = 8;
-                                        }
-                                        else if (portEnabled == 8)
-                                        {
-                                            string port = "7492";
-                                            string myProxy = "fcetxjzg:lrdyxa7zqqcf@185.199.229.156:7492";
-                                            firefoxOptions.SetPreference("network.proxy.type", 1);
-                                            firefoxOptions.SetPreference("network.proxy.http", myProxy);
-                                            firefoxOptions.SetPreference("network.proxy.http_port", port);
-
-                                            portEnabled = 9;
-                                        }
-                                        else if (portEnabled == 9)
-                                        {
-                                            string port = "8780";
-                                            string myProxy = "fcetxjzg:lrdyxa7zqqcf@144.168.217.88:8780";
-                                            firefoxOptions.SetPreference("network.proxy.type", 1);
-                                            firefoxOptions.SetPreference("network.proxy.http", myProxy);
-                                            firefoxOptions.SetPreference("network.proxy.http_port", port);
-
-                                            portEnabled = 10;
-                                        }
-                                        else if (portEnabled == 10)
-                                        {
-                                            portEnabled = 0;
-
-                                            MessageBox.Show(
-                                                "Proxy is out",
-                                                "Proxy 10",
-                                                MessageBoxButtons.OK,
-                                                MessageBoxIcon.Error,
-                                                MessageBoxDefaultButton.Button1,
-                                                MessageBoxOptions.DefaultDesktopOnly);
-                                        }
-                                        #endregion
-
-                                        firefoxService.HideCommandPromptWindow = true;
-                                        firefoxOptions.AddArguments("--headless");
-
-                                        driver = new FirefoxDriver(firefoxService, firefoxOptions)
-                                        {
-                                            Url = "https://www.deepl.com/translator"
-                                        };
-
-                                        System.Threading.Thread.Sleep(5000);
-
+                                        new Actions(driver).MoveToElement(clearButton).Click().Perform();
+                                    }
+                                    catch
+                                    {
                                         try
                                         {
-                                            driver.FindElement(By.XPath("//*[@dl-test=\"cookie-banner-lax-close-button\"]")).Click();
-                                            System.Threading.Thread.Sleep(500);
-                                        }
-                                        catch
-                                        {
-                                        }
-
-                                        driver.FindElement(By.XPath("//*[@dl-test=\"translator-target-lang-btn\"]")).Click();
-                                        System.Threading.Thread.Sleep(500);
-                                        driver.FindElement(By.XPath("//*[@dl-test=\"translator-lang-option-ru\"]")).Click();
-                                        System.Threading.Thread.Sleep(500);
-
-                                        try
-                                        {
-                                            var clearButton = driver.FindElement(By.XPath("//*[@id=\"panelTranslateText\"]/div[3]/section[1]/div[2]/div/span/span/span/button"));
+                                            var clearButton = driver.FindElement(By.XPath("//*[@dl-test=\"translator-source-clear-button\"]"));
                                             ((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(document.body.scrollHeight,0);");
 
                                             new Actions(driver).MoveToElement(clearButton).Click().Perform();
                                         }
                                         catch
                                         {
-                                            try
-                                            {
-                                                var clearButton = driver.FindElement(By.XPath("//*[@dl-test=\"translator-source-clear-button\"]"));
-                                                ((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(document.body.scrollHeight,0);");
-
-                                                new Actions(driver).MoveToElement(clearButton).Click().Perform();
-                                            }
-                                            catch
-                                            {
-
-                                            }
-                                        }
-
-                                        System.Threading.Thread.Sleep(500);
-
-                                        textInputElement = driver.FindElement(By.XPath("//*[@id=\"panelTranslateText\"]/div[1]/div[2]/section[1]/div[3]/div[2]/d-textarea/div"));
-                                        new Actions(driver).MoveToElement(textInputElement).Click().SendKeys(sourceText).Perform();
-
-                                        try
-                                        {
-                                            while (driver.FindElement(By.XPath("//*[@id=\"panelTranslateText\"]/div[3]/section[2]/div[3]/div[3]")).Displayed || driver.FindElement(By.XPath("//*[@id=\"translator-progress-close\"]")).Displayed)
-                                            {
-                                                System.Threading.Thread.Sleep(500);
-                                            }
-                                        }
-                                        catch
-                                        {
-
-                                        }
-
-                                        try
-                                        {
-                                            while (driver.FindElement(By.XPath("//div[@id=\"target-dummydiv\"]")).GetAttribute("innerHTML") == "..." || driver.FindElement(By.XPath("//div[@id=\"target-dummydiv\"]")).GetAttribute("innerHTML") == "\"" || driver.FindElement(By.XPath("//div[@id=\"target-dummydiv\"]")).GetAttribute("innerHTML") == @"""" || driver.FindElement(By.XPath("//div[@id=\"target-dummydiv\"]")).GetAttribute("innerHTML").Contains("[...]") || driver.FindElement(By.XPath("//div[@id=\"target-dummydiv\"]")).GetAttribute("innerHTML").Contains("[...] ") || driver.FindElement(By.XPath("//div[@id=\"target-dummydiv\"]")).GetAttribute("innerHTML").Contains("[...]  [...] ") || driver.FindElement(By.XPath("//div[@id=\"target-dummydiv\"]")).GetAttribute("innerHTML").Contains("[...]  [...] ") || driver.FindElement(By.XPath("//div[@id=\"target-dummydiv\"]")).GetAttribute("innerHTML").Contains(" [...]  [...] "))
-                                            {
-                                                System.Threading.Thread.Sleep(500);
-                                            }
-                                        }
-                                        catch
-                                        {
 
                                         }
                                     }
+
+                                    System.Threading.Thread.Sleep(500);
+
+                                    textInputElement = driver.FindElement(By.XPath("//*[@id=\"panelTranslateText\"]/div[1]/div[2]/section[1]/div[3]/div[2]/d-textarea/div"));
+                                    new Actions(driver).MoveToElement(textInputElement).Click().SendKeys(sourceText).Perform();
+
+                                    try
+                                    {
+                                        while (driver.FindElement(By.XPath("//*[@id=\"panelTranslateText\"]/div[3]/section[2]/div[3]/div[3]")).Displayed || driver.FindElement(By.XPath("//*[@id=\"translator-progress-close\"]")).Displayed)
+                                        {
+                                            System.Threading.Thread.Sleep(500);
+                                        }
+                                    }
+                                    catch
+                                    {
+
+                                    }
+
+                                    try
+                                    {
+                                        while (driver.FindElement(By.XPath("//div[@id=\"target-dummydiv\"]")).GetAttribute("innerHTML") == "..." || driver.FindElement(By.XPath("//div[@id=\"target-dummydiv\"]")).GetAttribute("innerHTML") == "\"" || driver.FindElement(By.XPath("//div[@id=\"target-dummydiv\"]")).GetAttribute("innerHTML") == @"""" || driver.FindElement(By.XPath("//div[@id=\"target-dummydiv\"]")).GetAttribute("innerHTML").Contains("[...]") || driver.FindElement(By.XPath("//div[@id=\"target-dummydiv\"]")).GetAttribute("innerHTML").Contains("[...] ") || driver.FindElement(By.XPath("//div[@id=\"target-dummydiv\"]")).GetAttribute("innerHTML").Contains("[...]  [...] ") || driver.FindElement(By.XPath("//div[@id=\"target-dummydiv\"]")).GetAttribute("innerHTML").Contains("[...]  [...] ") || driver.FindElement(By.XPath("//div[@id=\"target-dummydiv\"]")).GetAttribute("innerHTML").Contains(" [...]  [...] "))
+                                        {
+                                            System.Threading.Thread.Sleep(500);
+                                        }
+                                    }
+                                    catch
+                                    {
+
+                                    }
                                 }
                             }
-                            catch
-                            {
-
-                            }
-
-                            result = driver.FindElement(By.XPath("//*[@id=\"panelTranslateText\"]/div[1]/div[2]/section[2]/div[3]/div[4]/ul/li/button")).GetAttribute("innerHTML");
                         }
+                        catch
+                        {
+
+                        }
+
+                        result = driver.FindElement(By.XPath("//*[@id=\"panelTranslateText\"]/div[1]/div[2]/section[2]/div[3]/div[4]/ul/li/button")).GetAttribute("innerHTML");
+                    }
 
                     translatedText = result.Split("____");
 
@@ -11935,7 +12185,7 @@ namespace UTranslator
                             {
                                 if (gameName != "A Space for the Unbound")
                                 {
-                                  arraysBackup[lineNumbers[ii]] = translatedText[i];
+                                    arraysBackup[lineNumbers[ii]] = translatedText[i];
                                 }
                                 #region перевод с учетом пола
                                 //else
@@ -12054,11 +12304,11 @@ namespace UTranslator
                         }
                         else if (gameName == "nwr")
                         {
-                            
+
                             //if (arraysBackup[lineNumbers[ii]].Split(':')[0] == originalText[i])
                             if (arraysBackup[lineNumbers[ii]].Contains(originalText3[i]))
                             {
-                                arraysBackup[lineNumbers[ii]] = "\""+arraysBackup[lineNumbers[ii]].Split(SeparatorDifferentGames())[1]+"\"" + "    " + "\""+translatedText[i]+"\"";
+                                arraysBackup[lineNumbers[ii]] = "\"" + arraysBackup[lineNumbers[ii]].Split(SeparatorDifferentGames())[1] + "\"" + "    " + "\"" + translatedText[i] + "\"";
 
                                 break;
                             }
@@ -12084,7 +12334,7 @@ namespace UTranslator
                     File.Exists(@"D:\Program Files (x86)\Mozilla Firefox\firefox.exe") || File.Exists(@"D:\Program Files\Mozilla Firefox\firefox.exe") || File.Exists(@"Y:\Program Files (x86)\Mozilla Firefox\firefox.exe") || File.Exists(@"Y:\Program Files\Mozilla Firefox\firefox.exe") ||
                     File.Exists(@"Z:\Program Files (x86)\Mozilla Firefox\firefox.exe") || File.Exists(@"Z:\Program Files\Mozilla Firefox\firefox.exe") || File.Exists(@"E:\Program Files (x86)\Mozilla Firefox\firefox.exe") || File.Exists(@"E:\Program Files\Mozilla Firefox\firefox.exe") ||
                     File.Exists(@"F:\Program Files (x86)\Mozilla Firefox\firefox.exe") || File.Exists(@"F:\Program Files\Mozilla Firefox\firefox.exe") || File.Exists(@"S:\Program Files (x86)\Mozilla Firefox\firefox.exe") || File.Exists(@"S:\Program Files\Mozilla Firefox\firefox.exe") ||
-                    File.Exists(@"G:\Program Files (x86)\Mozilla Firefox\firefox.exe") || File.Exists(@"G:\Program Files\Mozilla Firefox\firefox.exe"))
+                    File.Exists(@"G:\Program Files (x86)\Mozilla Firefox\firefox.exe") || File.Exists(@"G:\Program Files\Mozilla Firefox\firefox.exe") || File.Exists(@"H:\Program Files (x86)\Mozilla Firefox\firefox.exe") || File.Exists(@"H:\Program Files\Mozilla Firefox\firefox.exe"))
                 {
                     cmdKill("geckodriver.exe");
                     cmdKill("firefox.exe");
@@ -12099,7 +12349,7 @@ namespace UTranslator
                     FirefoxDriverService firefoxService = FirefoxDriverService.CreateDefaultService();
 
                     firefoxService.HideCommandPromptWindow = true;
-                    firefoxService.FirefoxBinaryPath = @"S:\Program Files\Mozilla Firefox\firefox.exe"; //путь к firefox
+                    firefoxService.FirefoxBinaryPath = @"H:\Program Files\Mozilla Firefox\firefox.exe"; //путь к firefox
                     //firefoxOptions.AddArguments("--headless");
 
                     string translatorUrl = "https://www.deepl.com/translator";
@@ -12613,7 +12863,9 @@ namespace UTranslator
                 {
                     File.Copy(localizationPath + @"Global_English.txt", backupPath + @"\Global_English.txt");
                     deleteFile(localizationPath + @"Global_English.txt");
+                    System.Threading.Thread.Sleep(2500);
                     filesToRead = Directory.GetFiles(localizationPath);
+                    System.Threading.Thread.Sleep(2500);
                     File.Copy(backupPath + @"\Global_English.txt", localizationPath + @"Global_English.txt");
                     deleteFile(backupPath + @"\Global_English.txt");
 
@@ -12625,7 +12877,8 @@ namespace UTranslator
 
                 if (!File.Exists(localizationPath + @"Global_English.txt"))
                 {
-                    filesToRead = Directory.GetFiles(localizationPath);
+                    if (!translateUpdate)
+                        filesToRead = Directory.GetFiles(localizationPath);
 
                     for (int i = 0; i < filesToRead.Length; i++)
                     {
@@ -13564,10 +13817,10 @@ namespace UTranslator
 
                     if (gameName != "DungeonCrawler") // временно, потом убрать, когда разберусь с экспортом через quickbms
                     {
-                        unArchivTranslatedBackup();
+                        unArchivBackup();
                         System.Threading.Thread.Sleep(500);
 
-                        unArchivBackup();
+                        unArchivTranslatedBackup();
                     }
                     System.Threading.Thread.Sleep(500);
 
@@ -13578,6 +13831,7 @@ namespace UTranslator
                         for (int i = 0; i < backupFilesToRead.Length; i++)
                         {
                             string[] globalText = new string[] { };
+
                             if (File.Exists(backupTranslatedLocalizationPath + @"\Global_English.txt"))
                                 globalText = File.ReadAllLines(backupTranslatedLocalizationPath + @"\Global_English.txt");
 
@@ -13691,7 +13945,7 @@ namespace UTranslator
                             WorkingDirectory = Path.GetDirectoryName(backupTranslatedLocalizationPath + @"\I2.Loc\unpack_CX.bat"),
                             CreateNoWindow = true
                         }).WaitForExit();
-                        
+
                         deleteFile(backupTranslatedLocalizationPath + @"\I2.Loc\unpack_CX.bat");
                         deleteFile(backupTranslatedLocalizationPath + @"\I2.Loc\unPacker_CSV.exe");
 
@@ -14702,7 +14956,8 @@ namespace UTranslator
                 File.Copy(localizationPath + @"Game_NEW.locres", localizationPath + @"Game.locres");
                 System.Threading.Thread.Sleep(500);
                 deleteFile(localizationPath + @"Game_NEW.locres");
-                deleteFile(dataPath + @"\pakchunk0-Windows_0_P.pak");
+                if (File.Exists(dataPath + @"\pakchunk0-Windows_0_P.pak"))
+                    deleteFile(dataPath + @"\pakchunk0-Windows_0_P.pak");
                 System.Threading.Thread.Sleep(500);
 
                 ReplaceStringInFile(dataPath + @"\test.u4pak", 4, @"""" + dataPath + @"\pakchunk0-Windows_0_P.pak""");
@@ -14742,7 +14997,16 @@ namespace UTranslator
                 }
                 else
                 {
+                    if (!Directory.Exists(dataPath + @"\~mods"))
+                        Directory.CreateDirectory(dataPath + @"\~mods");
+
                     File.Copy(dataPath + @"\pakchunk0-Windows_0_P.pak", backupPath + gameName + "_translated_backup");
+
+                    File.Copy(dataPath + @"\pakchunk0-Windows_0_P.pak", dataPath + @"\~mods" + @"\pakchunk0-Windows_0_P.pak");
+                    System.Threading.Thread.Sleep(500);
+                    deleteFile(dataPath + @"\pakchunk0-Windows_0_P.pak");
+                    System.Threading.Thread.Sleep(500);
+                    File.Copy(backupPath + gameName + "_backup", dataPath + @"\pakchunk0-Windows_0_P.pak");
                 }
 
                 MessageBox.Show(
@@ -14776,7 +15040,8 @@ namespace UTranslator
 
             installEnd = true;
 
-            progressBar.BeginInvoke((MethodInvoker)(() => progressBar.Value = progressBar.Maximum));
+            progressBar.BeginInvoke((MethodInvoker)(() => progressBar.Value = progressBar.Maximum - 2));
+
             lblPercent.BeginInvoke((MethodInvoker)(() => lblPercent.Text = "100%"));
 
             //translatedEnd = false;
@@ -14809,7 +15074,7 @@ namespace UTranslator
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (progressBar.Value != 0 && progressBar.Value != progressBar.Maximum)
+            if (progressBar.Value != 0 && lblPercent.Text != "100%")
             {
                 DialogResult result = MessageBox.Show(
                          "Вы точно хотите закрыть русификатор? Весь прогресс русификации сохранится.\nДля продолжения русификации с места сохранения нужно будет нажать \"Установить\", если Вы устанавливали перевод "
@@ -14830,7 +15095,7 @@ namespace UTranslator
                     myMachineName = "GOODDARK-DESKTO";
                 }
             }
-            else if (progressBar.Value == 0 || progressBar.Value == progressBar.Maximum)
+            else if (progressBar.Value == 0 || lblPercent.Text == "100%")
             {
                 cmdKill("geckodriver.exe");
 
@@ -15032,7 +15297,7 @@ namespace UTranslator
         {
             var webClient = new WebClient();
             //webClient.DownloadProgressChanged += WebClientDownloadProgressChanged;
-            webClient.DownloadFileAsync(new Uri(link), filename);
+            webClient.DownloadFile(new Uri(link), filename);
         }
 
         void WebClientDownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
@@ -15088,7 +15353,7 @@ namespace UTranslator
             //Downloading_Files("https://downloader.disk.yandex.ru/disk/f939a99cc8db79e4d0ee966e065a71d6df6c7032248f8c03ea48a7932b2b988a/6473e69a/KDCJoYsET2b29yC03CAOk9bru4FeYiLLH205ePjxXqdAfD-AdfUu3-o-ST5bouHtPA80_UiUvcD78P_pYJ0C9w%3D%3D?uid=0&filename=info.txt&disposition=attachment&hash=HHVBYSQ/UTdMVLTnTXglhfaZhKEjoE%2Btc/IrtCLzNurE7FCkI9O/C45p17AIt0C7q/J6bpmRyOJonT3VoXnDag%3D%3D&limit=0&content_type=text%2Fplain&owner_uid=132802752&fsize=131&hid=1b636fcba57cb706ec9be4189bb0d063&media_type=document&tknv=v2", "tmp\\info.txt");//Загружаем файл с информацией о версии приложения
             Downloading_Files("https://cloclo51.cloud.mail.ru/weblink/view/PDGf/x9oxppGd5", "tmp\\info.txt");//Загружаем файл с информацией о версии приложения https://drive.google.com/uc?export=download&id=1Ffw0j2jEHeeDUY9JsiKaSHzon2T7cDSV
 
-            System.Threading.Thread.Sleep(2500);
+            System.Threading.Thread.Sleep(5000);
 
             string[] tmpLines = File.ReadAllLines(Application.StartupPath + "tmp\\info.txt");//Считываем первую строку, в ней указана версия
             string version_new = tmpLines[0].TrimEnd();
@@ -15130,6 +15395,8 @@ namespace UTranslator
                     //Downloading_Files("https://downloader.disk.yandex.ru/disk/ac1ae8962795eb99473ddb68a791fc4ecf3f9ae0f2640c8778f66d946e828db0/64748fc2/KDCJoYsET2b29yC03CAOk992LpuPDBPufQmCbcSRvtRmICwnruY1DsqMfIN3qdB08l6RZ1_CyGtIo21nBfV3Rw%3D%3D?uid=0&filename=UTranslator.exe&disposition=attachment&hash=1pzp3bVsguERZ4cbjoxTXSSDsVGAWDtL4vYP8KeFmAP54RgsN%2Bx5HRU%2BUPwYWyklq/J6bpmRyOJonT3VoXnDag%3D%3D&limit=0&content_type=application%2Fx-dosexec&owner_uid=132802752&fsize=88612251&hid=bc6821da8b6064628b84ffe01252497c&media_type=executable&tknv=v2", Application.StartupPath + "updater.exe");
                     //Downloading_Files("https://drive.google.com/uc?export=download&id=1ZKMg3KmWIeAb8eGWISCXaRL_OGoyNvbn&confirm=t&uuid=d4e21369-10c5-4373-b8b4-944fa67bf364&confirm=t&uuid=d4e21369-10c5-4373-b8b4-944fa67bf364&at=ALgDtswZtmeYmDSXsfEncV9HjmLw:1675077894911", Application.StartupPath + "updater.exe");
                 }
+
+                System.Threading.Thread.Sleep(5000);
 
                 ReplaceStringInFile(Application.StartupPath + @"UTranslator.config", 1, "version = " + version_new);
 
@@ -15313,7 +15580,7 @@ namespace UTranslator
 
         private void border_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void itemsDesc_CheckedChanged(object sender, EventArgs e)
@@ -15340,6 +15607,67 @@ namespace UTranslator
             //FileInfo fileSize = new FileInfo(Application.StartupPath + "test.txt");
             //
             //write_memory(31624, 0x18EB05727C1, text, buffer.Length);
+
+            //string testPath = @"H:\Dark and Darker\DungeonCrawler\Content\Paks\pakchunk0-Windows_0_P\DungeonCrawler\Content\Localization\Game\en";
+            //
+            //string[] text = File.ReadAllLines(testPath + @"\Game.locres.txt");
+            //
+            //for (int i = 0; i < text.Length; i++)
+            //{
+            //    string[] split = text[i].Split("=");
+            //
+            //    if (split[0] == split[1])
+            //    {
+            //        text[i] = text[i].Replace(split[0] + "=" + split[1], split[0]);
+            //    }
+            //}
+            //
+            //deleteFile(testPath + @"\Game.locres.txt");
+            //System.Threading.Thread.Sleep(2500);
+            //File.WriteAllLines(testPath + @"\Game.locres.txt", text);
+
+            //string testPath_translated = @"H:\Visual Projects\UTranslator\bin\Debug\net6.0-windows10.0.17763.0\backup\Unity_Assets_Files\Temtem_translated_backup\Mono\Assembly-CSharp\I2.Loc";
+            //string testPath_orig = @"H:\Visual Projects\UTranslator\bin\Debug\net6.0-windows10.0.17763.0\backup\Unity_Assets_Files\Temtem_backup\Mono\Assembly-CSharp\I2.Loc";
+            //string newFile = @"H:\Visual Projects\UTranslator\bin\Debug\net6.0-windows10.0.17763.0\backup\Unity_Assets_Files\test.csv";
+            //
+            //File.Create(newFile);
+            //
+            //string translatedText = File.ReadAllText(testPath_translated + @"\I2Languages.csv");
+            //string[] translatedText2 = File.ReadAllLines(testPath_translated + @"\I2Languages.csv");
+            //string[] origText = File.ReadAllLines(testPath_orig + @"\I2Languages.csv");
+            //
+            //for (int i = 0; i < origText.Length; i++)
+            //{
+            //    using (StreamWriter sw = new StreamWriter(newFile, true, encoding: Encoding.UTF8))
+            //    {
+            //        sw.WriteLine(" ");
+            //    }
+            //}
+            //
+            //System.Threading.Thread.Sleep(500);
+            //
+            //for (int i = 0; i < origText.Length; i++)
+            //{
+            //    string[] splitOrig = origText[i].Split(';');
+            //    
+            //    if (!translatedText.Contains(splitOrig[0]))
+            //    {
+            //        ReplaceStringInFile(newFile, i, origText[i]);
+            //    }
+            //}
+
+            //deleteFile(testPath + @"\backup.txt");
+            //System.Threading.Thread.Sleep(2500);
+            //File.WriteAllLines(testPath + @"\backup.txt", text);
+
+            MessageBox.Show(
+                         "1",
+                         "Новая 1",
+                         MessageBoxButtons.OK,
+                         MessageBoxIcon.Information,
+                         MessageBoxDefaultButton.Button1,
+                         MessageBoxOptions.DefaultDesktopOnly);
         }
+
     }
 }

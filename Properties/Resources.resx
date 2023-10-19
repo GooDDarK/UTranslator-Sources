@@ -145,9 +145,6 @@
   <data name="nw_oodle.bms" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\nw_oodle.bms;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="UPacker_Advanced.exe" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\UPacker_Advanced.exe;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="xml_q_export.bat" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\xml_q_export.bat;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
   </data>
@@ -193,9 +190,6 @@
   <data name="Export_bundles.bat" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Export_bundles.bat;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
   </data>
-  <data name="UPacker.exe" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\UPacker.exe;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="Export_ttf.bat" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Export_ttf.bat;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
   </data>
@@ -240,5 +234,11 @@
   </data>
   <data name="u4pak.exe" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\u4pak.exe;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UPacker.exe" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\UPacker.exe;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UPacker_Advanced.exe" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\UPacker_Advanced.exe;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

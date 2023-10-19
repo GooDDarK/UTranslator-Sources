@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "kAGl2xUX+pWb0RrsMTYj7qKlmknzB3QVHa/e64GViUnzSeFv1sraGw41GA+hqMctV7X9RwnvDUlZmQW4RTrYAQ==",
+  "dgSpecHash": "89HH8zRFHssISOFh/taPMFIT7yvREjc+DVwYq1N0BajbaHapDawKrDkTl+B6k0GmpcpT/HnqyY8fN5VOJLUCwQ==",
   "success": true,
-  "projectFilePath": "S:\\Visual Projects\\UTranslator\\UTranslator.csproj",
+  "projectFilePath": "H:\\Visual Projects\\UTranslator\\UTranslator.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\GlebV\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
-    "C:\\Users\\GlebV\\.nuget\\packages\\selenium.webdriver\\4.1.0\\selenium.webdriver.4.1.0.nupkg.sha512",
-    "C:\\Users\\GlebV\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.17763.28\\microsoft.windows.sdk.net.ref.10.0.17763.28.nupkg.sha512"
+    "C:\\Users\\petra\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
+    "C:\\Users\\petra\\.nuget\\packages\\selenium.webdriver\\4.1.0\\selenium.webdriver.4.1.0.nupkg.sha512",
+    "C:\\Users\\petra\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.17763.29\\microsoft.windows.sdk.net.ref.10.0.17763.29.nupkg.sha512"
   ],
   "logs": []
 }

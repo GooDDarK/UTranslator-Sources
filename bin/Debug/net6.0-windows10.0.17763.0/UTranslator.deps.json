@@ -9,21 +9,21 @@
       "UTranslator/0.2.9": {
         "dependencies": {
           "Selenium.WebDriver": "4.1.0",
-          "runtimepack.Microsoft.Windows.SDK.NET.Ref": "10.0.17763.28"
+          "runtimepack.Microsoft.Windows.SDK.NET.Ref": "10.0.17763.29"
         },
         "runtime": {
           "UTranslator.dll": {}
         }
       },
-      "runtimepack.Microsoft.Windows.SDK.NET.Ref/10.0.17763.28": {
+      "runtimepack.Microsoft.Windows.SDK.NET.Ref/10.0.17763.29": {
         "runtime": {
           "Microsoft.Windows.SDK.NET.dll": {
             "assemblyVersion": "10.0.17763.24",
-            "fileVersion": "10.0.17763.28"
+            "fileVersion": "10.0.17763.29"
           },
           "WinRT.Runtime.dll": {
             "assemblyVersion": "2.0.0.0",
-            "fileVersion": "2.0.1.40881"
+            "fileVersion": "2.0.3.42921"
           }
         }
       },
@@ -54,7 +54,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "runtimepack.Microsoft.Windows.SDK.NET.Ref/10.0.17763.28": {
+    "runtimepack.Microsoft.Windows.SDK.NET.Ref/10.0.17763.29": {
       "type": "runtimepack",
       "serviceable": false,
       "sha512": ""
