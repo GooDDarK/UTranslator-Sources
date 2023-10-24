@@ -67,3 +67,14 @@ H:\Visual Projects\UTranslator\obj\Debug\net6.0-windows10.0.17763.0\win-x64\UTra
 H:\Visual Projects\UTranslator\obj\Debug\net6.0-windows10.0.17763.0\win-x64\refint\UTranslator.dll
 H:\Visual Projects\UTranslator\obj\Debug\net6.0-windows10.0.17763.0\win-x64\UTranslator.genruntimeconfig.cache
 H:\Visual Projects\UTranslator\obj\Debug\net6.0-windows10.0.17763.0\win-x64\ref\UTranslator.dll
+H:\Visual Projects\UTranslator\obj\Debug\net6.0-windows10.0.17763.0\win-x64\UTranslator.EditorForm.resources
+H:\Visual Projects\UTranslator\bin\Debug\net6.0-windows10.0.17763.0\win-x64\selenium-manager\linux\selenium-manager
+H:\Visual Projects\UTranslator\bin\Debug\net6.0-windows10.0.17763.0\win-x64\selenium-manager\macos\selenium-manager
+H:\Visual Projects\UTranslator\bin\Debug\net6.0-windows10.0.17763.0\win-x64\selenium-manager\windows\selenium-manager.exe
+H:\Visual Projects\UTranslator\bin\Debug\net6.0-windows10.0.17763.0\win-x64\Google.Apis.dll
+H:\Visual Projects\UTranslator\bin\Debug\net6.0-windows10.0.17763.0\win-x64\Google.Apis.Auth.PlatformServices.dll
+H:\Visual Projects\UTranslator\bin\Debug\net6.0-windows10.0.17763.0\win-x64\Google.Apis.Auth.dll
+H:\Visual Projects\UTranslator\bin\Debug\net6.0-windows10.0.17763.0\win-x64\Google.Apis.Core.dll
+H:\Visual Projects\UTranslator\bin\Debug\net6.0-windows10.0.17763.0\win-x64\Google.Apis.Sheets.v4.dll
+H:\Visual Projects\UTranslator\bin\Debug\net6.0-windows10.0.17763.0\win-x64\Microsoft.Win32.SystemEvents.dll
+H:\Visual Projects\UTranslator\bin\Debug\net6.0-windows10.0.17763.0\win-x64\System.Drawing.Common.dll

@@ -69,6 +69,7 @@ namespace UTranslator
             machineNameText = new System.Windows.Forms.TextBox();
             itemsDesc = new System.Windows.Forms.CheckBox();
             button1 = new System.Windows.Forms.Button();
+            TranslateEditorBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -169,9 +170,9 @@ namespace UTranslator
             // 
             // gamesListButton
             // 
-            gamesListButton.Location = new System.Drawing.Point(655, 225);
+            gamesListButton.Location = new System.Drawing.Point(656, 171);
             gamesListButton.Name = "gamesListButton";
-            gamesListButton.Size = new System.Drawing.Size(164, 38);
+            gamesListButton.Size = new System.Drawing.Size(164, 52);
             gamesListButton.TabIndex = 14;
             gamesListButton.Text = "Список поддерживаемых для русификации игр";
             gamesListButton.UseVisualStyleBackColor = true;
@@ -427,7 +428,7 @@ namespace UTranslator
             // 
             googleButton.AutoSize = true;
             googleButton.Enabled = false;
-            googleButton.Location = new System.Drawing.Point(668, 164);
+            googleButton.Location = new System.Drawing.Point(668, 138);
             googleButton.Name = "googleButton";
             googleButton.Size = new System.Drawing.Size(131, 19);
             googleButton.TabIndex = 39;
@@ -499,6 +500,16 @@ namespace UTranslator
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
+            // TranslateEditorBtn
+            // 
+            TranslateEditorBtn.Location = new System.Drawing.Point(656, 232);
+            TranslateEditorBtn.Name = "TranslateEditorBtn";
+            TranslateEditorBtn.Size = new System.Drawing.Size(164, 27);
+            TranslateEditorBtn.TabIndex = 45;
+            TranslateEditorBtn.Text = "Редактор перевода";
+            TranslateEditorBtn.UseVisualStyleBackColor = true;
+            TranslateEditorBtn.Click += TranslateEditorBtn_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -507,6 +518,7 @@ namespace UTranslator
             AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             BackColor = System.Drawing.SystemColors.Window;
             ClientSize = new System.Drawing.Size(839, 353);
+            Controls.Add(TranslateEditorBtn);
             Controls.Add(button1);
             Controls.Add(itemsDesc);
             Controls.Add(machineNameText);
@@ -599,6 +611,7 @@ namespace UTranslator
         private System.Windows.Forms.TextBox machineNameText;
         private System.Windows.Forms.CheckBox itemsDesc;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button TranslateEditorBtn;
     }
 }
 

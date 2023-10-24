@@ -6,41 +6,169 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v6.0": {
-      "Newtonsoft.Json/12.0.3": {
+      "Google.Apis/1.62.0": {
+        "dependencies": {
+          "Google.Apis.Core": "1.62.0"
+        },
         "runtime": {
-          "lib/netstandard2.0/Newtonsoft.Json.dll": {
-            "assemblyVersion": "12.0.0.0",
-            "fileVersion": "12.0.3.23909"
+          "lib/netstandard2.0/Google.Apis.dll": {
+            "assemblyVersion": "1.62.0.0",
+            "fileVersion": "1.62.0.0"
           }
         }
       },
-      "Selenium.WebDriver/4.1.0": {
+      "Google.Apis.Auth/1.62.0": {
         "dependencies": {
-          "Newtonsoft.Json": "12.0.3"
+          "Google.Apis": "1.62.0",
+          "Google.Apis.Core": "1.62.0"
         },
         "runtime": {
-          "lib/net5.0/WebDriver.dll": {
+          "lib/netstandard2.0/Google.Apis.Auth.PlatformServices.dll": {
+            "assemblyVersion": "1.62.0.0",
+            "fileVersion": "1.62.0.0"
+          },
+          "lib/netstandard2.0/Google.Apis.Auth.dll": {
+            "assemblyVersion": "1.62.0.0",
+            "fileVersion": "1.62.0.0"
+          }
+        }
+      },
+      "Google.Apis.Core/1.62.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.3"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Apis.Core.dll": {
+            "assemblyVersion": "1.62.0.0",
+            "fileVersion": "1.62.0.0"
+          }
+        }
+      },
+      "Google.Apis.Sheets.v4/1.62.0.3148": {
+        "dependencies": {
+          "Google.Apis": "1.62.0",
+          "Google.Apis.Auth": "1.62.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Apis.Sheets.v4.dll": {
+            "assemblyVersion": "1.62.0.3148",
+            "fileVersion": "1.62.0.3148"
+          }
+        }
+      },
+      "Microsoft.Win32.SystemEvents/7.0.0": {
+        "runtime": {
+          "lib/net6.0/Microsoft.Win32.SystemEvents.dll": {
+            "assemblyVersion": "7.0.0.0",
+            "fileVersion": "7.0.22.51805"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net6.0/Microsoft.Win32.SystemEvents.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "7.0.0.0",
+            "fileVersion": "7.0.22.51805"
+          }
+        }
+      },
+      "Newtonsoft.Json/13.0.3": {
+        "runtime": {
+          "lib/net6.0/Newtonsoft.Json.dll": {
+            "assemblyVersion": "13.0.0.0",
+            "fileVersion": "13.0.3.27908"
+          }
+        }
+      },
+      "Selenium.WebDriver/4.14.1": {
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.3",
+          "System.Drawing.Common": "7.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/WebDriver.dll": {
             "assemblyVersion": "4.0.0.0",
             "fileVersion": "4.0.0.0"
+          }
+        }
+      },
+      "System.Drawing.Common/7.0.0": {
+        "dependencies": {
+          "Microsoft.Win32.SystemEvents": "7.0.0"
+        },
+        "runtime": {
+          "lib/net6.0/System.Drawing.Common.dll": {
+            "assemblyVersion": "7.0.0.0",
+            "fileVersion": "7.0.22.51805"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net6.0/System.Drawing.Common.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "7.0.0.0",
+            "fileVersion": "7.0.22.51805"
           }
         }
       }
     }
   },
   "libraries": {
-    "Newtonsoft.Json/12.0.3": {
+    "Google.Apis/1.62.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg==",
-      "path": "newtonsoft.json/12.0.3",
-      "hashPath": "newtonsoft.json.12.0.3.nupkg.sha512"
+      "sha512": "sha512-7K6DuMmRVz+7QDEJgAEYicKGRhjkNaKhkaf+qoqdLEzvVmEtIUW49+2gON1EdbYjLEjexVb5TGgtzn+/WTNFwg==",
+      "path": "google.apis/1.62.0",
+      "hashPath": "google.apis.1.62.0.nupkg.sha512"
     },
-    "Selenium.WebDriver/4.1.0": {
+    "Google.Apis.Auth/1.62.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-d4smisz4a/wJCM2TzkKTl+BLfvZUTvaobhKElDfCVZlvY8ThsC8VAoBNWTlg1H/GGzIP//yVGko/W0FILTgkYA==",
-      "path": "selenium.webdriver/4.1.0",
-      "hashPath": "selenium.webdriver.4.1.0.nupkg.sha512"
+      "sha512": "sha512-gGhgv2xmFrDAmXj5Ei5LW1pLHxqAsj8crwOd0vhrdXJm3mIRm3vd+MfZ9ApbqvsaAMyCIlZBRhyT5mwPJnWNYw==",
+      "path": "google.apis.auth/1.62.0",
+      "hashPath": "google.apis.auth.1.62.0.nupkg.sha512"
+    },
+    "Google.Apis.Core/1.62.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-UV2vs58DyrQ/roZ59Mmny/5aE/2w5ww9Svyn6+ThXeq3Jw2RdOP1C57ez1V8+1KwY0ivPPIIp6e5jO6K5n5F+A==",
+      "path": "google.apis.core/1.62.0",
+      "hashPath": "google.apis.core.1.62.0.nupkg.sha512"
+    },
+    "Google.Apis.Sheets.v4/1.62.0.3148": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-mIjiQXuUaNqllnoffbjyPCH7cvCtUHwg0OxIVSshc/uslgwmxd3nnzeZ0wRvcIUw72y2Lwm9erjUtk9HYKWzqQ==",
+      "path": "google.apis.sheets.v4/1.62.0.3148",
+      "hashPath": "google.apis.sheets.v4.1.62.0.3148.nupkg.sha512"
+    },
+    "Microsoft.Win32.SystemEvents/7.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-2nXPrhdAyAzir0gLl8Yy8S5Mnm/uBSQQA7jEsILOS1MTyS7DbmV1NgViMtvV1sfCD1ebITpNwb1NIinKeJgUVQ==",
+      "path": "microsoft.win32.systemevents/7.0.0",
+      "hashPath": "microsoft.win32.systemevents.7.0.0.nupkg.sha512"
+    },
+    "Newtonsoft.Json/13.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ==",
+      "path": "newtonsoft.json/13.0.3",
+      "hashPath": "newtonsoft.json.13.0.3.nupkg.sha512"
+    },
+    "Selenium.WebDriver/4.14.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-9gmtnYWDyscnVPdDZ1dMI8SikKLcrsS+GNweZVKMWxcUsagHOdQnX1yAA22KeTWbRubwp5Vw/E6NF/6drzaTbA==",
+      "path": "selenium.webdriver/4.14.1",
+      "hashPath": "selenium.webdriver.4.14.1.nupkg.sha512"
+    },
+    "System.Drawing.Common/7.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-KIX+oBU38pxkKPxvLcLfIkOV5Ien8ReN78wro7OF5/erwcmortzeFx+iBswlh2Vz6gVne0khocQudGwaO1Ey6A==",
+      "path": "system.drawing.common/7.0.0",
+      "hashPath": "system.drawing.common.7.0.0.nupkg.sha512"
     }
   }
 }

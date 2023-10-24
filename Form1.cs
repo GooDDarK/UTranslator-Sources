@@ -142,7 +142,7 @@ namespace UTranslator
         {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.AppendLine("firstrun = 1");
-            stringBuilder.AppendLine("version = 0.3.8");
+            stringBuilder.AppendLine("version = 0.3.8.1");
             stringBuilder.AppendLine("skill = 0");
             stringBuilder.AppendLine("items = 0");
             stringBuilder.AppendLine("npc = 0");
@@ -1849,8 +1849,8 @@ namespace UTranslator
                         if (!Directory.Exists(Application.StartupPath + "tmp"))//Создаём временную директорию                                                                                                                                                                                      //в идеале объединить
                             Directory.CreateDirectory(Application.StartupPath + "tmp");                                                                                                                                                                                                            //в идеале объединить
                                                                                                                                                                                                                                                                                                    //в идеале объединить
-                                                                                                                                                                                                                                                                                                   //Downloading_Files("https://downloader.disk.yandex.ru/disk/f939a99cc8db79e4d0ee966e065a71d6df6c7032248f8c03ea48a7932b2b988a/6473e69a/KDCJoYsET2b29yC03CAOk9bru4FeYiLLH205ePjxXqdAfD-AdfUu3-o-ST5bouHtPA80_UiUvcD78P_pYJ0C9w%3D%3D?uid=0&filename=info.txt&disposition=attachment&hash=HHVBYSQ/UTdMVLTnTXglhfaZhKEjoE%2Btc/IrtCLzNurE7FCkI9O/C45p17AIt0C7q/J6bpmRyOJonT3VoXnDag%3D%3D&limit=0&content_type=text%2Fplain&owner_uid=132802752&fsize=131&hid=1b636fcba57cb706ec9be4189bb0d063&media_type=document&tknv=v2", Application.StartupPath + "tmp\\info.txt");//Загружаем файл с информацией о версии приложения                                                                        //в идеале объединить
-                        Downloading_Files("https://cloclo51.cloud.mail.ru/weblink/view/PDGf/x9oxppGd5", Application.StartupPath + "tmp\\info.txt");//Загружаем файл с информацией о версии приложения                                                                        //в идеале объединить
+                        Downloading_Files("https://drive.google.com/u/0/uc?id=133H0Fa8zwFqjVJViY20GeLpABFxpj-Dj&export=download&confirm=t&uuid=539fa2d8-5ac2-48dd-b8d3-164bff2905da&at=AB6BwCCFIP68el8g5-AV873P7cJy:1698171282437", "tmp\\info.txt");//Загружаем файл с информацией о версии приложения
+                        //Downloading_Files("https://cloclo51.cloud.mail.ru/weblink/view/PDGf/x9oxppGd5", Application.StartupPath + "tmp\\info.txt");//Загружаем файл с информацией о версии приложения                                                                        //в идеале объединить
                                                                                                                                                    //в идеале объединить
                         System.Threading.Thread.Sleep(5000);
 
@@ -1870,8 +1870,8 @@ namespace UTranslator
                         if (!Directory.Exists(Application.StartupPath + "tmp"))//Создаём временную директорию                                                                                                                                                                                      //в идеале объединить
                             Directory.CreateDirectory(Application.StartupPath + "tmp");                                                                                                                                                                                                            //в идеале объединить
                                                                                                                                                                                                                                                                                                    //в идеале объединить
-                                                                                                                                                                                                                                                                                                   //Downloading_Files("https://downloader.disk.yandex.ru/disk/f939a99cc8db79e4d0ee966e065a71d6df6c7032248f8c03ea48a7932b2b988a/6473e69a/KDCJoYsET2b29yC03CAOk9bru4FeYiLLH205ePjxXqdAfD-AdfUu3-o-ST5bouHtPA80_UiUvcD78P_pYJ0C9w%3D%3D?uid=0&filename=info.txt&disposition=attachment&hash=HHVBYSQ/UTdMVLTnTXglhfaZhKEjoE%2Btc/IrtCLzNurE7FCkI9O/C45p17AIt0C7q/J6bpmRyOJonT3VoXnDag%3D%3D&limit=0&content_type=text%2Fplain&owner_uid=132802752&fsize=131&hid=1b636fcba57cb706ec9be4189bb0d063&media_type=document&tknv=v2", Application.StartupPath + "tmp\\info.txt");//Загружаем файл с информацией о версии приложения                                                                        //в идеале объединить
-                        Downloading_Files("https://cloclo51.cloud.mail.ru/weblink/view/PDGf/x9oxppGd5", Application.StartupPath + "tmp\\info.txt");//Загружаем файл с информацией о версии приложения                                                                        //в идеале объединить
+                        Downloading_Files("https://drive.google.com/u/0/uc?id=133H0Fa8zwFqjVJViY20GeLpABFxpj-Dj&export=download&confirm=t&uuid=539fa2d8-5ac2-48dd-b8d3-164bff2905da&at=AB6BwCCFIP68el8g5-AV873P7cJy:1698171282437", "tmp\\info.txt");//Загружаем файл с информацией о версии приложения
+                        //Downloading_Files("https://cloclo51.cloud.mail.ru/weblink/view/PDGf/x9oxppGd5", Application.StartupPath + "tmp\\info.txt");//Загружаем файл с информацией о версии приложения                                                                        //в идеале объединить
                                                                                                                                                    //в идеале объединить
 
                         System.Threading.Thread.Sleep(5000);
@@ -2521,8 +2521,8 @@ namespace UTranslator
                 if (!Directory.Exists(Application.StartupPath + "tmp"))
                     Directory.CreateDirectory(Application.StartupPath + "tmp");
 
-                //Downloading_Files("https://downloader.disk.yandex.ru/disk/f939a99cc8db79e4d0ee966e065a71d6df6c7032248f8c03ea48a7932b2b988a/6473e69a/KDCJoYsET2b29yC03CAOk9bru4FeYiLLH205ePjxXqdAfD-AdfUu3-o-ST5bouHtPA80_UiUvcD78P_pYJ0C9w%3D%3D?uid=0&filename=info.txt&disposition=attachment&hash=HHVBYSQ/UTdMVLTnTXglhfaZhKEjoE%2Btc/IrtCLzNurE7FCkI9O/C45p17AIt0C7q/J6bpmRyOJonT3VoXnDag%3D%3D&limit=0&content_type=text%2Fplain&owner_uid=132802752&fsize=131&hid=1b636fcba57cb706ec9be4189bb0d063&media_type=document&tknv=v2", Application.StartupPath + "tmp\\info.txt");//Загружаем файл с информацией о версии приложения
-                Downloading_Files("https://cloclo51.cloud.mail.ru/weblink/view/PDGf/x9oxppGd5", Application.StartupPath + "tmp\\info.txt");//Загружаем файл с информацией о версии приложения
+                Downloading_Files("https://drive.google.com/u/0/uc?id=133H0Fa8zwFqjVJViY20GeLpABFxpj-Dj&export=download&confirm=t&uuid=539fa2d8-5ac2-48dd-b8d3-164bff2905da&at=AB6BwCCFIP68el8g5-AV873P7cJy:1698171282437", "tmp\\info.txt");//Загружаем файл с информацией о версии приложения
+                //Downloading_Files("https://cloclo51.cloud.mail.ru/weblink/view/PDGf/x9oxppGd5", Application.StartupPath + "tmp\\info.txt");//Загружаем файл с информацией о версии приложения
 
                 System.Threading.Thread.Sleep(5000);
 
@@ -15350,8 +15350,8 @@ namespace UTranslator
             string[] configLines = File.ReadAllLines(Application.StartupPath + @"UTranslator.config");
             string cur_ver = configLines[1].Replace("version = ", "");
 
-            //Downloading_Files("https://downloader.disk.yandex.ru/disk/f939a99cc8db79e4d0ee966e065a71d6df6c7032248f8c03ea48a7932b2b988a/6473e69a/KDCJoYsET2b29yC03CAOk9bru4FeYiLLH205ePjxXqdAfD-AdfUu3-o-ST5bouHtPA80_UiUvcD78P_pYJ0C9w%3D%3D?uid=0&filename=info.txt&disposition=attachment&hash=HHVBYSQ/UTdMVLTnTXglhfaZhKEjoE%2Btc/IrtCLzNurE7FCkI9O/C45p17AIt0C7q/J6bpmRyOJonT3VoXnDag%3D%3D&limit=0&content_type=text%2Fplain&owner_uid=132802752&fsize=131&hid=1b636fcba57cb706ec9be4189bb0d063&media_type=document&tknv=v2", "tmp\\info.txt");//Загружаем файл с информацией о версии приложения
-            Downloading_Files("https://cloclo51.cloud.mail.ru/weblink/view/PDGf/x9oxppGd5", "tmp\\info.txt");//Загружаем файл с информацией о версии приложения https://drive.google.com/uc?export=download&id=1Ffw0j2jEHeeDUY9JsiKaSHzon2T7cDSV
+            Downloading_Files("https://drive.google.com/u/0/uc?id=133H0Fa8zwFqjVJViY20GeLpABFxpj-Dj&export=download&confirm=t&uuid=539fa2d8-5ac2-48dd-b8d3-164bff2905da&at=AB6BwCCFIP68el8g5-AV873P7cJy:1698171282437", "tmp\\info.txt");//Загружаем файл с информацией о версии приложения
+            //Downloading_Files("https://cloclo51.cloud.mail.ru/weblink/view/PDGf/x9oxppGd5", "tmp\\info.txt");//Загружаем файл с информацией о версии приложения
 
             System.Threading.Thread.Sleep(5000);
 
@@ -15385,15 +15385,15 @@ namespace UTranslator
 
                 if (Process.GetProcessesByName("UTranslator_x86").Length > 0)
                 {
-                    Downloading_Files("https://cloclo52.cloud.mail.ru/weblink/view/7dNb/2yJGNCRZ6", Application.StartupPath + "updater.exe");
-                    //Downloading_Files("https://downloader.disk.yandex.ru/disk/53a458f6b24586f6df2d4cff1b5bf066ebe9b6cb1d9bfdcc795d1377be650599/64748fa7/KDCJoYsET2b29yC03CAOk_sPg75KntIdof7baBa6SCQ5BpJRdcFva-pZv9tS1QzKgAj-3n4OGz3a4ZB39nQmcg%3D%3D?uid=0&filename=UTranslator_x86.exe&disposition=attachment&hash=UQ8dE32i0wuWgdiP2/RZQZbN2iXsMqT7g1NgLyT/KJiNWl997EBqMMo4L5FEwzXeq/J6bpmRyOJonT3VoXnDag%3D%3D&limit=0&content_type=application%2Fx-dosexec&owner_uid=132802752&fsize=88579483&hid=01f2d51afedb951fe42870fcc16b6e40&media_type=executable&tknv=v2", Application.StartupPath + "updater.exe");
-                    //Downloading_Files("https://drive.google.com/u/0/uc?id=1G2ZkXvS0nmrG0xyXPHyZQ6qXHcO6FSAg&export=download&confirm=t&uuid=539fa2d8-5ac2-48dd-b8d3-164bff2905da&at=ALgDtszKOtbnE-eG92gxJ2pyDmlB:1675077661489", Application.StartupPath + "updater.exe");
+                    //Downloading_Files("https://cloclo52.cloud.mail.ru/weblink/view/7dNb/2yJGNCRZ6", Application.StartupPath + "updater.exe");
+
+                    Downloading_Files("https://drive.google.com/u/0/uc?id=1x1mxAII4_mH4L8ZRv7OBtayQwuj9Vxc8&export=download&confirm=t&uuid=539fa2d8-5ac2-48dd-b8d3-164bff2905da&at=AB6BwCCFIP68el8g5-AV873P7cJy:1698171282437", Application.StartupPath + "updater.exe");
                 }
                 else
                 {
-                    Downloading_Files("https://cloclo53.cloud.mail.ru/weblink/view/joxB/Tu94spC9S", Application.StartupPath + "updater.exe");
-                    //Downloading_Files("https://downloader.disk.yandex.ru/disk/ac1ae8962795eb99473ddb68a791fc4ecf3f9ae0f2640c8778f66d946e828db0/64748fc2/KDCJoYsET2b29yC03CAOk992LpuPDBPufQmCbcSRvtRmICwnruY1DsqMfIN3qdB08l6RZ1_CyGtIo21nBfV3Rw%3D%3D?uid=0&filename=UTranslator.exe&disposition=attachment&hash=1pzp3bVsguERZ4cbjoxTXSSDsVGAWDtL4vYP8KeFmAP54RgsN%2Bx5HRU%2BUPwYWyklq/J6bpmRyOJonT3VoXnDag%3D%3D&limit=0&content_type=application%2Fx-dosexec&owner_uid=132802752&fsize=88612251&hid=bc6821da8b6064628b84ffe01252497c&media_type=executable&tknv=v2", Application.StartupPath + "updater.exe");
-                    //Downloading_Files("https://drive.google.com/uc?export=download&id=1ZKMg3KmWIeAb8eGWISCXaRL_OGoyNvbn&confirm=t&uuid=d4e21369-10c5-4373-b8b4-944fa67bf364&confirm=t&uuid=d4e21369-10c5-4373-b8b4-944fa67bf364&at=ALgDtswZtmeYmDSXsfEncV9HjmLw:1675077894911", Application.StartupPath + "updater.exe");
+                    //Downloading_Files("https://cloclo53.cloud.mail.ru/weblink/view/joxB/Tu94spC9S", Application.StartupPath + "updater.exe");
+
+                    Downloading_Files("https://drive.google.com/u/0/uc?id=1zr--hFtZkgIGY7rBBLJEwjAw-jiUrb-q&export=download&confirm=t&uuid=539fa2d8-5ac2-48dd-b8d3-164bff2905da&at=AB6BwCA_uJnCoVPTe6tFz23w6Llp:1698171222554", Application.StartupPath + "updater.exe");
                 }
 
                 System.Threading.Thread.Sleep(5000);
@@ -15669,5 +15669,11 @@ namespace UTranslator
                          MessageBoxOptions.DefaultDesktopOnly);
         }
 
+        private void TranslateEditorBtn_Click(object sender, EventArgs e)
+        {
+            //this.Hide();
+            EditorForm editorForm = new EditorForm();
+            editorForm.Show();
+        }
     }
 }

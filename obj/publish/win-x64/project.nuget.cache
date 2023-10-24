@@ -1,11 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "89HH8zRFHssISOFh/taPMFIT7yvREjc+DVwYq1N0BajbaHapDawKrDkTl+B6k0GmpcpT/HnqyY8fN5VOJLUCwQ==",
+  "dgSpecHash": "tne7oFDF6CfbV+ZRZatsN7WihVVoW3JO9eNkPY+McVuGnwz6k84ZGspzXyvTBVCllaiDbjmJs1jAxkVqgniFSQ==",
   "success": true,
   "projectFilePath": "H:\\Visual Projects\\UTranslator\\UTranslator.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\petra\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
-    "C:\\Users\\petra\\.nuget\\packages\\selenium.webdriver\\4.1.0\\selenium.webdriver.4.1.0.nupkg.sha512",
+    "C:\\Users\\petra\\.nuget\\packages\\google.apis\\1.62.0\\google.apis.1.62.0.nupkg.sha512",
+    "C:\\Users\\petra\\.nuget\\packages\\google.apis.auth\\1.62.0\\google.apis.auth.1.62.0.nupkg.sha512",
+    "C:\\Users\\petra\\.nuget\\packages\\google.apis.core\\1.62.0\\google.apis.core.1.62.0.nupkg.sha512",
+    "C:\\Users\\petra\\.nuget\\packages\\google.apis.sheets.v4\\1.62.0.3148\\google.apis.sheets.v4.1.62.0.3148.nupkg.sha512",
+    "C:\\Users\\petra\\.nuget\\packages\\microsoft.win32.systemevents\\7.0.0\\microsoft.win32.systemevents.7.0.0.nupkg.sha512",
+    "C:\\Users\\petra\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\petra\\.nuget\\packages\\selenium.webdriver\\4.14.1\\selenium.webdriver.4.14.1.nupkg.sha512",
+    "C:\\Users\\petra\\.nuget\\packages\\system.drawing.common\\7.0.0\\system.drawing.common.7.0.0.nupkg.sha512",
     "C:\\Users\\petra\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.17763.29\\microsoft.windows.sdk.net.ref.10.0.17763.29.nupkg.sha512"
   ],
   "logs": []

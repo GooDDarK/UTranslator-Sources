@@ -1,0 +1,2 @@
+H:\Visual Projects\UTranslator\bin\Release\net6.0-windows\publish\UTranslator\x86\selenium-manager\macos\selenium-manager
+H:\Visual Projects\UTranslator\bin\Release\net6.0-windows\publish\UTranslator\x86\UTranslator.exe
