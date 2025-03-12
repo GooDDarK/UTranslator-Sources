@@ -502,12 +502,14 @@ namespace UTranslator
             // 
             // TranslateEditorBtn
             // 
+            TranslateEditorBtn.Enabled = false;
             TranslateEditorBtn.Location = new System.Drawing.Point(656, 232);
             TranslateEditorBtn.Name = "TranslateEditorBtn";
             TranslateEditorBtn.Size = new System.Drawing.Size(164, 27);
             TranslateEditorBtn.TabIndex = 45;
             TranslateEditorBtn.Text = "Редактор перевода";
             TranslateEditorBtn.UseVisualStyleBackColor = true;
+            TranslateEditorBtn.Visible = false;
             TranslateEditorBtn.Click += TranslateEditorBtn_Click;
             // 
             // Form1

@@ -142,7 +142,7 @@ namespace UTranslator
         {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.AppendLine("firstrun = 1");
-            stringBuilder.AppendLine("version = 0.3.8.1");
+            stringBuilder.AppendLine("version = 0.3.8.3");
             stringBuilder.AppendLine("skill = 0");
             stringBuilder.AppendLine("items = 0");
             stringBuilder.AppendLine("npc = 0");
@@ -265,6 +265,8 @@ namespace UTranslator
                 machineNameText.Visible = true;
                 button1.Enabled = true;
                 button1.Visible = true;
+                TranslateEditorBtn.Enabled = true;
+                TranslateEditorBtn.Visible = true;
                 machineNameText.Text = myMachineName;
                 deeplButton.Enabled = true;
             }
@@ -274,6 +276,8 @@ namespace UTranslator
                 machineNameText.Visible = false;
                 button1.Enabled = false;
                 button1.Visible = false;
+                TranslateEditorBtn.Enabled = false;
+                TranslateEditorBtn.Visible = false;
                 deeplButton.Checked = false;
                 deeplButton.Enabled = false;
                 yandexButton.Checked = true;
@@ -1850,8 +1854,8 @@ namespace UTranslator
                             Directory.CreateDirectory(Application.StartupPath + "tmp");                                                                                                                                                                                                            //в идеале объединить
                                                                                                                                                                                                                                                                                                    //в идеале объединить
                         Downloading_Files("https://drive.google.com/u/0/uc?id=133H0Fa8zwFqjVJViY20GeLpABFxpj-Dj&export=download&confirm=t&uuid=539fa2d8-5ac2-48dd-b8d3-164bff2905da&at=AB6BwCCFIP68el8g5-AV873P7cJy:1698171282437", "tmp\\info.txt");//Загружаем файл с информацией о версии приложения
-                        //Downloading_Files("https://cloclo51.cloud.mail.ru/weblink/view/PDGf/x9oxppGd5", Application.StartupPath + "tmp\\info.txt");//Загружаем файл с информацией о версии приложения                                                                        //в идеале объединить
-                                                                                                                                                   //в идеале объединить
+                                                                                                                                                                                                                                                     //Downloading_Files("https://cloclo51.cloud.mail.ru/weblink/view/PDGf/x9oxppGd5", Application.StartupPath + "tmp\\info.txt");//Загружаем файл с информацией о версии приложения                                                                        //в идеале объединить
+                                                                                                                                                                                                                                                     //в идеале объединить
                         System.Threading.Thread.Sleep(5000);
 
                         string[] tmpLines = File.ReadAllLines(Application.StartupPath + "tmp\\info.txt");//Считываем первую строку, в ней указана версия                                                                                                                                           //в идеале объединить
@@ -1871,8 +1875,8 @@ namespace UTranslator
                             Directory.CreateDirectory(Application.StartupPath + "tmp");                                                                                                                                                                                                            //в идеале объединить
                                                                                                                                                                                                                                                                                                    //в идеале объединить
                         Downloading_Files("https://drive.google.com/u/0/uc?id=133H0Fa8zwFqjVJViY20GeLpABFxpj-Dj&export=download&confirm=t&uuid=539fa2d8-5ac2-48dd-b8d3-164bff2905da&at=AB6BwCCFIP68el8g5-AV873P7cJy:1698171282437", "tmp\\info.txt");//Загружаем файл с информацией о версии приложения
-                        //Downloading_Files("https://cloclo51.cloud.mail.ru/weblink/view/PDGf/x9oxppGd5", Application.StartupPath + "tmp\\info.txt");//Загружаем файл с информацией о версии приложения                                                                        //в идеале объединить
-                                                                                                                                                   //в идеале объединить
+                                                                                                                                                                                                                                                     //Downloading_Files("https://cloclo51.cloud.mail.ru/weblink/view/PDGf/x9oxppGd5", Application.StartupPath + "tmp\\info.txt");//Загружаем файл с информацией о версии приложения                                                                        //в идеале объединить
+                                                                                                                                                                                                                                                     //в идеале объединить
 
                         System.Threading.Thread.Sleep(5000);
 
@@ -15134,9 +15138,15 @@ namespace UTranslator
         {
             Process.Start(new ProcessStartInfo
             {
-                FileName = "Инструкция.pdf",
+                FileName = "https://vk.com/@utranslator-manual",
                 UseShellExecute = true
             });
+
+            //Process.Start(new ProcessStartInfo
+            //{
+            //    FileName = "Инструкция.pdf",
+            //    UseShellExecute = true
+            //});
         }
 
         #region google api
